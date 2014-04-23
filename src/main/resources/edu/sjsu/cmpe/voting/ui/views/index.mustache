@@ -1,0 +1,186 @@
+
+<html>
+<head>
+    <title>Ballot Box</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/flatly/bootstrap.min.css" rel="stylesheet">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.0.min.js"></script>
+     <script type="text/javascript">
+        var color = "#F71313";
+        var default_color = "#ACB6C0";
+       function frm_submit(){
+			var poll_code = $.trim($("#poll_code").val());
+			if(poll_code == ''){
+				alert("Please enter the Poll Code");
+				$("#poll_code").css("border-color",color);
+				return false;
+			}else{
+				if(!chk_spcl_chr(poll_code)){	
+					alert("Please enter a valid Poll Code");
+					$("#poll_code").css("border-color",color);
+					return false;
+				}
+				$("#poll_form").attr("action", "/voting/"+poll_code);	
+				return true;
+			}
+			return false;
+		};
+		
+		function chk_spcl_chr(val){
+			var regex = new RegExp("^[a-zA-Z0-9 ]+$");
+			var key = val;
+			if (!regex.test(key)) {
+			   return false;
+			}
+			return true;
+		}
+		
+		function frm_register(){
+			var name 						= $.trim($("#inputName").val());
+			var username 					= $.trim($("#inputUName").val());
+			var inputNewPassword 			= $.trim($("#inputNewPassword").val());
+			var inputConfirmPassword 		= $.trim($("#inputConfirmPassword").val());
+			var error_count = 0;
+			if(name == ""){
+				error_count++;
+				$("#inputName").css("border-color",color);
+			}else if(!chk_spcl_chr(name)){	
+				error_count++;
+				$("#inputName").css("border-color",color);
+			}else{
+				$("#inputName").css("border-color",default_color);
+			}
+			if(username == ""){
+				error_count++;
+				$("#inputUName").css("border-color",color);
+			}else if(!chk_spcl_chr(username)){	
+				error_count++;
+				$("#inputUName").css("border-color",color);
+			}else{
+				$("#inputUName").css("border-color",default_color);
+			}
+			
+			if((inputNewPassword != inputConfirmPassword) ||(inputNewPassword =='') ){
+				error_count++;
+				$("#inputNewPassword").css("border-color",color);
+				$("#inputNewPassword").val("");
+				$("#inputConfirmPassword").val("");				
+			}else{
+				$("#inputNewPassword").css("border-color",default_color);
+			}
+			
+			if(error_count>0){
+				return false;
+			}else{
+				return true;
+			}
+		}
+		
+		function frm_reset(){
+			$("#inputName").val("");
+			$("#inputUName").val("");
+			$("#inputNewPassword").val("");
+			$("#inputConfirmPassword").val("");
+			
+		}
+		
+		function onFBLogin(){
+			FB.getLoginStatus(function(response) {
+  if (response.status === 'connected') {
+    // the user is logged in and has authenticated your
+    // app, and response.authResponse supplies
+    // the user's ID, a valid access token, a signed
+    // request, and the time the access token 
+    // and signed request each expire
+    var uid = response.authResponse.userID;
+    var accessToken = response.authResponse.accessToken;
+    window.location.href= "/voting/poll";
+  } else if (response.status === 'not_authorized') {
+    // the user is logged in to Facebook, 
+    // but has not authenticated your app
+  } else {
+    // the user isn't logged in to Facebook.
+    window.location.href= "/voting/";
+  }
+ });
+		}
+		
+    </script>
+    <style>
+	.error {
+		color: #F71313 !important ;
+		opacity: 1;
+	}
+	</style>
+</head>
+<body>
+<div id="fb-root"></div>
+<script>
+window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1594873474071994',
+          status     : true,
+          xfbml      : true
+        });
+        FB.getLoginStatus(function(response) {
+  if (response.status === 'connected') {
+    // the user is logged in and has authenticated your
+    // app, and response.authResponse supplies
+    // the user's ID, a valid access token, a signed
+    // request, and the time the access token 
+    // and signed request each expire
+    var uid = response.authResponse.userID;
+    var accessToken = response.authResponse.accessToken;
+    window.location.href= "/voting/poll";
+  } else if (response.status === 'not_authorized') {
+    // the user is logged in to Facebook, 
+    // but has not authenticated your app
+  } else {
+    // the user isn't logged in to Facebook.
+    
+  }
+ });
+      };
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1594873474071994";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/voting">Ballot Box</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+            <form class="navbar-form navbar-right" method="GET" onsubmit="return frm_submit();" action="/voting" id="poll_form">
+				<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" onlogin="onFBLogin();"></div>
+            </form>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <div class="bs-docs-section">
+            <div class="row">
+                <div class="col-lg-6">
+                    <form class="form-horizontal" name="register" id="register" method="GET" onsubmit="return frm_register();" action="http://facebook.com">
+                        <fieldset>
+                            <legend>Login using Facebook</legend>
+                            <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="true" data-auto-logout-link="true" onlogin="onFBLogin();"></div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
