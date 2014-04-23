@@ -104,6 +104,27 @@
 				}
 			}
 		}
+		
+		if($("#start_date").val()==""){
+			$("#start_date").css("border-color",color);
+				error_count++;
+		}else if($("#end_date").val()==""){
+			$("#end_date").css("border-color",color);
+				error_count++;
+		}else{
+			var start_arr = $("#start_date").val().split('/');
+			var end_arr = $("#end_date").val().split('/');
+			var start_date = start_arr[2]+start_arr[1]+start_arr[0];
+			var end_date = end_arr[2]+end_arr[1]+end_arr[0];
+			if(end_date < start_date){
+				$("#end_date").css("border-color",color);
+				$("#start_date").css("border-color",color);
+				error_count++;
+			}else{
+				$("#end_date").css("border-color",default_color);
+				$("#start_date").css("border-color",default_color);
+			}
+		}
 		if(error_count > 0){
 			return false;
 		}
