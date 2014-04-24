@@ -112,26 +112,15 @@
                     </tr>
 
                 </thead>
-
+			
                 <tbody>
-
+					{{#poll.options}}
                     <tr>
 
-                        <td>1.</td>
-
-                        <td><input id="option1" name="answer" type="radio" value="{{poll.option1}}" />{{poll.option1}}</td>
+                        <td><input id="{{option}}" name="answer" type="radio" value="{{option}}" />{{option}}</td>
 
                     </tr>
-
-                    <tr>
-
-                        <td>2.</td>
-
-                        <td><input id="option2" name="answer" type="radio" value="{{poll.option2}}" />{{poll.option2}}</td>
-
-
-                    </tr>
-
+					{{/poll.options}}
                     <tr>
 
                         <td colspan="2">
@@ -156,18 +145,31 @@
             <fieldset>
 
                 <legend>Dashboard</legend>
+                <table id="pollTable" class="table table-striped table-hover ">
 
-                <div class="form-group">
+                <thead>
 
-                    <label for="inputUsername" class="col-lg-6 control-label">Option 1: {{poll.option1Count}}</label>
+                    <tr>
 
-                </div>
+                        <th><label for="optionCount" class="col-lg-6 control-label">Option Count:</label></th>
 
-                <div class="form-group">
+                    </tr>
 
-                    <label for="inputPassword" class="col-lg-6 control-label">Option 2: {{poll.option2Count}}</label>
+                </thead>
+			
+                <tbody>
+					{{#poll.options}}
+                    <tr>
 
-                </div>
+                        <td><label for="optionName" class="col-lg-6 control-label">{{option}} :</label></td>
+                        <td><label for="count" class="col-lg-6 control-label">{{count}}</label></td>
+
+                    </tr>
+					{{/poll.options}}
+
+                </tbody>
+
+            </table>
 
             </fieldset>
 
