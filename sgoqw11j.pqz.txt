@@ -1,0 +1,46 @@
+﻿Merge branch 'master' of https://github.com/parthkathuria/voting-TestRepository
+
+Conflicts:
+	logs/voting.log
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 3 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#   (use "git commit" to conclude merge)
+#
+# Changes to be committed:
+#
+#	modified:   logs/voting.log
+#	new file:   src/main/resources/assets/app.js
+#	new file:   src/main/resources/assets/calendar/images/ui-bg_diagonals-thick_18_b81900_40x40.png
+#	new file:   src/main/resources/assets/calendar/images/ui-bg_diagonals-thick_20_666666_40x40.png
+#	new file:   src/main/resources/assets/calendar/images/ui-bg_flat_10_000000_40x100.png
+#	new file:   src/main/resources/assets/calendar/images/ui-bg_glass_100_f6f6f6_1x400.png
+#	new file:   src/main/resources/assets/calendar/images/ui-bg_glass_100_fdf5ce_1x400.png
+#	new file:   src/main/resources/assets/calendar/images/ui-bg_glass_65_ffffff_1x400.png
+#	new file:   src/main/resources/assets/calendar/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+#	new file:   src/main/resources/assets/calendar/images/ui-bg_highlight-soft_100_eeeeee_1x100.png
+#	new file:   src/main/resources/assets/calendar/images/ui-bg_highlight-soft_75_ffe45c_1x100.png
+#	new file:   src/main/resources/assets/calendar/images/ui-icons_222222_256x240.png
+#	new file:   src/main/resources/assets/calendar/images/ui-icons_228ef1_256x240.png
+#	new file:   src/main/resources/assets/calendar/images/ui-icons_ef8c08_256x240.png
+#	new file:   src/main/resources/assets/calendar/images/ui-icons_ffd27a_256x240.png
+#	new file:   src/main/resources/assets/calendar/images/ui-icons_ffffff_256x240.png
+#	new file:   src/main/resources/assets/calendar/jquery-ui-1.10.4.custom.css
+#	new file:   src/main/resources/assets/calendar/jquery-ui-1.10.4.custom.js
+#	new file:   src/main/resources/assets/calendar/jquery-ui.css
+#	new file:   src/main/resources/assets/calendar/jquery-ui.min.js
+#	modified:   src/main/resources/edu/sjsu/cmpe/voting/ui/views/createPoll.mustache
+#
+
