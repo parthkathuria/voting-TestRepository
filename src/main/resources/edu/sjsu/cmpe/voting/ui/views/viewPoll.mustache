@@ -117,7 +117,8 @@
 					{{#poll.options}}
                     <tr>
 
-                        <td><input id="{{option}}" name="answer" type="radio" value="{{option}}" />{{option}}</td>
+                        <td><input id="{{option}}" name="answer" type="radio" value="{{option}}" /></td>
+                        <td>{{option}}</td>
 
                     </tr>
 					{{/poll.options}}
@@ -151,7 +152,8 @@
 
                     <tr>
 
-                        <th><label for="optionCount" class="col-lg-6 control-label">Option Count:</label></th>
+                        <th>Option Count:</th>
+                        
 
                     </tr>
 
@@ -161,8 +163,8 @@
 					{{#poll.options}}
                     <tr>
 
-                        <td><label for="optionName" class="col-lg-6 control-label">{{option}} :</label></td>
-                        <td><label for="count" class="col-lg-6 control-label">{{count}}</label></td>
+                        <td>{{option}} :</td>
+                        <td>{{count}}</td>
 
                     </tr>
 					{{/poll.options}}
