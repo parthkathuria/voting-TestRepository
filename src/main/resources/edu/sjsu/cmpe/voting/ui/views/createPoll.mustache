@@ -7,9 +7,6 @@
     <link href="../assets/calendar/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 	<script src="../assets/calendar/jquery-ui-1.10.4.custom.js"></script>
     <script type="text/javascript">
-    $( document ).ready(function() {
-        
-    });
     var color = "#F71313";
         var default_color = "#ACB6C0";
     function onFBLogin(){
@@ -33,9 +30,10 @@
 		}
     function createPoll() {
     		if(validate_createPoll()){
-            var question = document.getElementById("question").value;
             var poll = {
                 question : $("#question").val(),
+                startDate : $("#start_date").val(),
+                endDate : $("#end_date").val(),
                 options:[]
             };
             var table = document.getElementById("pollTable");

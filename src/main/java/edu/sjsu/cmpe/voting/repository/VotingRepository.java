@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.WriteConcern;
@@ -73,8 +74,9 @@ public class VotingRepository implements VotingRepositoryInterface {
 		BasicDBObject pollInMemory = new BasicDBObject("_id", newPoll.getId());
 		pollInMemory.append("question", newPoll.getQuestion());
 		pollInMemory.append("options", new ArrayList());
-		System.out.println(pollInMemory.get("question"));
-		System.out.println(pollInMemory.get("options"));
+		pollInMemory.append("startDate", newPoll.getStartDate());
+		pollInMemory.append("endDate",newPoll.getEndDate());
+		pollInMemory.append("email", newPoll.getEmail());
 		try {
 			DB db = mongoConnection();
 			DBCollection poll = db.getCollection("poll");
@@ -108,6 +110,9 @@ public class VotingRepository implements VotingRepositoryInterface {
 				// System.out.println(pollObj.get("_id").toString());
 				poll.setId(pollObj.get("_id").toString());
 				poll.setQuestion(pollObj.get("question").toString());
+				poll.setStartDate(pollObj.get("startDate").toString());
+				poll.setEndDate(pollObj.get("endDate").toString());
+				poll.setEmail(pollObj.get("email").toString());
 				ArrayList<DBObject> optionsObj = (ArrayList<DBObject>) pollObj.get("options");
 				ArrayList<Options> options = new ArrayList<Options>();
 				for (int i = 0; i < optionsObj.size(); i++) {
@@ -147,6 +152,9 @@ public class VotingRepository implements VotingRepositoryInterface {
 
 			poll.setId(pollObj.get("_id").toString());
 			poll.setQuestion(pollObj.get("question").toString());
+			poll.setStartDate(pollObj.get("startDate").toString());
+			poll.setEndDate(pollObj.get("endDate").toString());
+			poll.setEmail(pollObj.get("email").toString());
 			ArrayList<DBObject> optionsObj = (ArrayList<DBObject>) pollObj.get("options");
 			ArrayList<Options> options = new ArrayList<Options>();
 			for (int i = 0; i < optionsObj.size(); i++) {
@@ -197,6 +205,9 @@ public class VotingRepository implements VotingRepositoryInterface {
 						Poll p = new Poll();
 						p.setId(pollObject.get("_id").toString());
 						p.setQuestion(pollObject.get("question").toString());
+						p.setStartDate(pollObject.get("startDate").toString());
+						p.setEndDate(pollObject.get("endDate").toString());
+						p.setEmail(pollObject.get("email").toString());
 						ArrayList<DBObject> optionsObj = (ArrayList<DBObject>) pollObject.get("options");
 						ArrayList<Options> options = new ArrayList<Options>();
 						for (int j = 0; j < optionsObj.size(); j++) {

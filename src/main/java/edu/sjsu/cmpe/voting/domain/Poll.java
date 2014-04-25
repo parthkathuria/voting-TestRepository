@@ -3,9 +3,13 @@
  */
 package edu.sjsu.cmpe.voting.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import org.joda.time.format.ISODateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 
 public class Poll {
 
@@ -15,17 +19,13 @@ public class Poll {
 	private String question;
 	@JsonProperty("options")
 	private ArrayList<Options> options = new ArrayList<Options>();
-	/*//@JsonProperty("option1")
-	private String option1;
-	//@JsonProperty("option2")
-	private String option2;
+	@JsonProperty("startDate")
+	private String startDate;
+	@JsonProperty("endDate")
+	private String endDate;
+	@JsonProperty("email")
+	private String email;
 	
-	//private String answer;
-	//@JsonProperty("option1Count")
-	private int option1Count;
-	//@JsonProperty("option2Count")
-	private int option2Count;*/
-
 	/**
 	 * @return the question
 	 */
@@ -68,6 +68,48 @@ public class Poll {
 	 */
 	public void setOptions(ArrayList<Options> options) {
 		this.options = options;
+	}
+
+	/**
+	 * @return the startDate
+	 */
+	public String getStartDate() {
+		return startDate;
+	}
+
+	/**
+	 * @param startDate the startDate to set
+	 */
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	/**
+	 * @return the endDate
+	 */
+	public String getEndDate() {
+		return endDate;
+	}
+
+	/**
+	 * @param endDate the endDate to set
+	 */
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
