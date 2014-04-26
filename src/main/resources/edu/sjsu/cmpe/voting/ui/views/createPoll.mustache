@@ -29,48 +29,53 @@
  });
 		}
     function createPoll() {
-    		if(validate_createPoll()){
-    		
-            var poll = {
-                question : $("#question").val(),
-                startDate : $("#start_date").val(),
-                endDate : $("#end_date").val(),
-                options:[],
-            };
-            var table = document.getElementById("pollTable");
-            rowCount = table.rows.length;
-            var options = []
-            for (var i = 1; i < rowCount; i++) {
-                var jsonData = {
-                    option : $("#option"+i).val(),
-                    count : 0
-                }
-                poll.options.push(jsonData);
-            }
-            //alert(poll);
-            $.ajax({
-                type: "POST",
-                url: "/voting/poll",
-                data: JSON.stringify(poll),
-                contentType: "application/json",
-                success: function (response) {
-                    alert("Poll Successfully Created. Your Poll ID is : " + response);
-                },
-                statusCode: {
-                    200: function () {
-                        alert("Poll Created");
+            if (validate_createPoll()) {
+                FB.getLoginStatus(function (response) {
+                    if (response.status === 'connected') {
+                        var uid = response.authResponse.userID;
+                        var poll = {
+                            question: $("#question").val(),
+                            startDate: $("#start_date").val(),
+                            endDate: $("#end_date").val(),
+                            options: [],
+                        };
+                        var table = document.getElementById("pollTable");
+                        rowCount = table.rows.length;
+                        var options = []
+                        for (var i = 1; i < rowCount; i++) {
+                            var jsonData = {
+                                option: $("#option" + i).val(),
+                                count: 0
+                            }
+                            poll.options.push(jsonData);
+                        }
+                        //alert(poll);
+                        $.ajax({
+                            type: "POST",
+                            url: "/voting/" +uid,
+                            data: JSON.stringify(poll),
+                            contentType: "application/json",
+                            success: function (response) {
+                                alert("Poll Successfully Created. Your Poll ID is : " + response);
+                            },
+                            statusCode: {
+                                200: function () {
+                                    alert("Poll Created");
 
-                    },
-                    404: function () {
-                        alert("Page Not Found");
+                                },
+                                404: function () {
+                                    alert("Page Not Found");
 
-                    },
-                    500: function () {
-                        alert("Error Creating Poll");
+                                },
+                                500: function () {
+                                    alert("Error Creating Poll");
 
+                                }
+                            }
+                        });
                     }
-                }
-            });
+                });
+                
             }
         }
 	function validate_createPoll(){
@@ -332,13 +337,13 @@ window.fbAsyncInit = function() {
                                 <label for="inputUsername" class="col-lg-6 control-label">ID of Polls you created: </label>
                             </div>
                             <table class="table table-striped table-hover ">
-
+								{{#user}}
                                     <tr>
                                         <td>
-                                    		{{user.pollCreated}}       
+                                    		{{pollsCreated}}       
                                         </td>
                                     </tr>
-                                 
+                                {{/user}} 
                                 </table>
                         </fieldset>
                     </form>

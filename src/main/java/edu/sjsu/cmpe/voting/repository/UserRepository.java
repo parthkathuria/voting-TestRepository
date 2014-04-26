@@ -27,9 +27,14 @@ public class UserRepository implements UserRepositoryInterface {
 		checkNotNull(newUser, "User instance cannot be null");
 		Users u = getUser(newUser.getId());
 		if (u == null) {
-			DBObject user = new BasicDBObject("_id", newUser.getId()).append(
-					"pollsCreated", newUser.getPollsCreated()).append(
-					"pollsSubmited", newUser.getPollsSubmited());
+			DBObject user = new BasicDBObject("_id", newUser.getId());
+			user.put("name", newUser.getName());
+			user.put("first_name", newUser.getFirst_name());
+			user.put("last_name", newUser.getLast_name());
+			user.put("email", newUser.getEmail());
+			user.put("gender", newUser.getGender());
+			user.put("pollsCreated", newUser.getPollsCreated());
+			user.put("pollsSubmitted", newUser.getPollsSubmited());
 			try {
 				DB db = mongoConnection();
 				DBCollection polls = db.getCollection("users");
@@ -60,6 +65,11 @@ public class UserRepository implements UserRepositoryInterface {
 				return null;
 			} else {
 				user.setId(userObj.get("_id").toString());
+				user.setName(userObj.get("name").toString());
+				user.setFirst_name(userObj.get("first_name").toString());
+				user.setLast_name(userObj.get("last_name").toString());
+				user.setEmail(userObj.get("email").toString());
+				user.setGender(userObj.get("gender").toString());
 				user.setPollsCreated((ArrayList<String>) userObj.get("pollsCreated"));
 				user.setPollsSubmited((ArrayList<String>) userObj.get("pollsSubmited"));
 				return user;

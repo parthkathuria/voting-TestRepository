@@ -3,6 +3,8 @@
  */
 package edu.sjsu.cmpe.voting.ui.resources;
 
+import java.io.Console;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -12,6 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.eclipse.jetty.server.Authentication.User;
 
 import com.sun.jersey.api.core.HttpRequestContext;
 import com.sun.research.ws.wadl.Request;
@@ -65,7 +69,9 @@ public class ViewPollResource {
 	@GET
 	public UserDetails getCreatePoll(@PathParam("userId") String userId) {
 		Users user = userRepository.getUser(userId);
-		return new UserDetails(user);
+		System.out.println(user.getFirst_name());
+		System.out.println(user.getName());
+		return new UserDetails(userRepository.getUser(userId));
 	}
 
 	@GET
