@@ -23,8 +23,8 @@ public class Poll {
 	private String startDate;
 	@JsonProperty("endDate")
 	private String endDate;
-	@JsonProperty("email")
-	private String email;
+	@JsonProperty("userId")
+	private String userId;
 	
 	/**
 	 * @return the question
@@ -99,17 +99,17 @@ public class Poll {
 	}
 
 	/**
-	 * @return the email
+	 * @return the userId
 	 */
-	public String getEmail() {
-		return email;
+	public String getUserId() {
+		return userId;
 	}
 
 	/**
-	 * @param email the email to set
+	 * @param userId the userId to set
 	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }

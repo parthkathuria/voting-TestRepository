@@ -42,10 +42,10 @@ public class VotingService extends Service<VotingServiceConfiguration> {
 		environment.addResource(RootResource.class);
 		/** Poll APIs */
 		VotingRepositoryInterface voteRepository = new VotingRepository();
-		//UserRepositoryInterface userRepository = new UserRepository();
+		UserRepositoryInterface userRepository = new UserRepository();
 			environment.addResource(new VoteResource(voteRepository));
 			//environment.addResource(new ViewPollResource(voteRepository));
-			environment.addResource(new ViewPollResource(voteRepository));
-			//environment.addResource(new mainResource(userRepository));
+			environment.addResource(new ViewPollResource(voteRepository, userRepository));
+			environment.addResource(new mainResource(userRepository));
 	}
 }

@@ -5,38 +5,92 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Users {
-	@JsonProperty("username")
-	private String username;
-	@JsonProperty("password")
-	private String password;
+	@JsonProperty("id")
+	private String id;
 	@JsonProperty("name")
 	private String name;
-	@JsonProperty("polls")
-	private ArrayList<String> polls = new ArrayList<String>();
+	@JsonProperty("first_name")
+	private String first_name;
+	@JsonProperty("last_name")
+	private String last_name;
+	@JsonProperty("email")
+	private String email;
+	@JsonProperty("gender")
+	private String gender;
+	private ArrayList<String> pollsCreated = new ArrayList<String>();
+	private ArrayList<String> pollsSubmited = new ArrayList<String>();
 	
 	/**
-	 * @return the username
+	 * @return the pollsCreated
 	 */
-	public String getUsername() {
-		return username;
+	public ArrayList<String> getPollsCreated() {
+		return pollsCreated;
 	}
 	/**
-	 * @param username the username to set
+	 * @param pollsCreated the pollsCreated to set
 	 */
-	public void setUsername(String username) {
-		this.username = username;
+	public void setPollsCreated(ArrayList<String> pollsCreated) {
+		this.pollsCreated = pollsCreated;
 	}
 	/**
-	 * @return the password
+	 * @return the pollsSubmited
 	 */
-	public String getPassword() {
-		return password;
+	public ArrayList<String> getPollsSubmited() {
+		return pollsSubmited;
 	}
 	/**
-	 * @param password the password to set
+	 * @param pollsSubmited the pollsSubmited to set
 	 */
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPollsSubmited(ArrayList<String> pollsSubmited) {
+		this.pollsSubmited = pollsSubmited;
+	}
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+	/**
+	 * @return the first_name
+	 */
+	public String getFirst_name() {
+		return first_name;
+	}
+	/**
+	 * @param first_name the first_name to set
+	 */
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+	/**
+	 * @return the last_name
+	 */
+	public String getLast_name() {
+		return last_name;
+	}
+	/**
+	 * @param last_name the last_name to set
+	 */
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
+	}
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	/**
 	 * @return the name
@@ -51,18 +105,16 @@ public class Users {
 		this.name = name;
 	}
 	/**
-	 * @return the polls
+	 * @return the gender
 	 */
-	public ArrayList<String> getPolls() {
-		return polls;
+	public String getGender() {
+		return gender;
 	}
 	/**
-	 * @param polls the polls to set
+	 * @param gender the gender to set
 	 */
-	public void setPolls(ArrayList<String> polls) {
-		this.polls = polls;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
-	
-
 
 }

@@ -15,38 +15,57 @@ import javax.ws.rs.core.Response;
 
 import com.sun.jersey.api.core.HttpRequestContext;
 import com.sun.research.ws.wadl.Request;
+import com.yammer.dropwizard.jersey.params.LongParam;
 import com.yammer.metrics.annotation.Timed;
 
 import edu.sjsu.cmpe.voting.domain.Poll;
+import edu.sjsu.cmpe.voting.domain.PollDetails;
+import edu.sjsu.cmpe.voting.domain.Users;
 import edu.sjsu.cmpe.voting.dto.LinkDto;
 import edu.sjsu.cmpe.voting.dto.LinksDto;
 import edu.sjsu.cmpe.voting.dto.PollDto;
+import edu.sjsu.cmpe.voting.repository.UserRepositoryInterface;
 import edu.sjsu.cmpe.voting.repository.VotingRepositoryInterface;
 import edu.sjsu.cmpe.voting.ui.views.ViewPoll_View;
-import edu.sjsu.cmpe.voting.ui.views.createPoll;
+import edu.sjsu.cmpe.voting.ui.views.UserDetails;
 import edu.sjsu.cmpe.voting.ui.views.homePage;
 
-@Path("/")
+@Path("/{userId}")
 @Produces(MediaType.TEXT_HTML)
 public class ViewPollResource {
 	private final VotingRepositoryInterface voteRepository;
-
+	private final UserRepositoryInterface userRepository;
 	// private final String template;
-	public ViewPollResource(VotingRepositoryInterface voteRepository) {
+	public ViewPollResource(VotingRepositoryInterface voteRepository, UserRepositoryInterface userRepository) {
 		this.voteRepository = voteRepository;
+		this.userRepository = userRepository;
 	}
 
-	@GET
+	/*@GET
 	public homePage getHome() {
 
 		return new homePage("index.mustache");
 	}
-
+	*/
+	/*@POST
+	@Timed(name = "create-user")
+	public Response createUser(@PathParam("userId") LongParam userId) {
+		Users user = userRepository.getUser(userId.get());
+		if(user == null){
+			Users newUser = new Users();
+			newUser.setId(userId.get());
+			userRepository.saveUser(newUser);
+			return Response.status(200).entity(userId).build();
+		}else{
+			return Response.status(201).entity(userId).build();
+		}
+		
+	}
+*/
 	@GET
-	@Path("/poll")
-	public homePage getCreatePoll() {
-
-		return new homePage("createPoll.mustache");
+	public UserDetails getCreatePoll(@PathParam("userId") String userId) {
+		Users user = userRepository.getUser(userId);
+		return new UserDetails(user);
 	}
 
 	@GET
@@ -83,12 +102,13 @@ public class ViewPollResource {
 	}
 
 	@POST
-	@Path("/poll")
 	@Timed(name = "create-poll")
-	public Response createPoll(Poll request) {
-		Poll savedPoll = voteRepository.savePoll(request);
-		String pollId = savedPoll.getId();
-		return Response.status(200).entity(pollId).build();
+	public Response createPoll(@PathParam("userId") String userId, Poll newPoll) {
+		
+		newPoll.setUserId(userId);
+		Poll savedPoll = voteRepository.savePoll(newPoll);
+		userRepository.updatePollCreation(userId, savedPoll.getId().toString());
+		return Response.status(200).entity(savedPoll.getId()).build();
 	}
 
 }

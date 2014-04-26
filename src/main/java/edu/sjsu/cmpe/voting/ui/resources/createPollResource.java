@@ -12,7 +12,7 @@ import edu.sjsu.cmpe.voting.domain.Poll;
 import edu.sjsu.cmpe.voting.dto.LinkDto;
 import edu.sjsu.cmpe.voting.dto.LinksDto;
 import edu.sjsu.cmpe.voting.repository.VotingRepositoryInterface;
-import edu.sjsu.cmpe.voting.ui.views.createPoll;;
+import edu.sjsu.cmpe.voting.ui.views.UserDetails;;
 
 @Path("/poll")
 @Produces(MediaType.TEXT_HTML)
@@ -24,7 +24,7 @@ public class createPollResource {
 	
 	@POST
 	@Timed(name = "create-poll")
-	public createPoll createPoll(Poll request) {
+	public UserDetails createPoll(Poll request) {
 
 		Poll savedPoll = voteRepository.savePoll(request);
 

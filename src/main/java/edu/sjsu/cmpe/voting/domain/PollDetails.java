@@ -3,117 +3,129 @@
  */
 package edu.sjsu.cmpe.voting.domain;
 
+import java.util.ArrayList;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * Wrapper class for Poll
  */
 public class PollDetails {
 
-	private String _id;
-	private String question;
-	private String option1;
-	private String option2;
-	private int option1Count;
-	private int option2Count;
+	//@JsonProperty("id")
+		private String id;
+		@JsonProperty("question")
+		private String question;
+		@JsonProperty("options")
+		private ArrayList<Options> options = new ArrayList<Options>();
+		@JsonProperty("startDate")
+		private String startDate;
+		@JsonProperty("endDate")
+		private String endDate;
+		@JsonProperty("email")
+		private String email;
+		@JsonProperty("userId")
+		private String userId;
+		
+		/**
+		 * @return the question
+		 */
+		public String getQuestion() {
+			return question;
+		}
 
-	public PollDetails(Poll poll) {
-		// TODO Auto-generated constructor stub
-//		this._id = poll.getUniqueKey();
-//		this.question = poll.getQuestion();
-//		this.option1 = poll.getOption1();
-//		this.option2 = poll.getOption2();
-//		this.option1Count = poll.getOption1Count();
-//		this.option2Count = poll.getOption2Count();
-	}
+		/**
+		 * @param question
+		 *            the question to set
+		 */
+		public void setQuestion(String question) {
+			this.question = question;
+		}
 
-	/**
-	 * @return the question
-	 */
-	public String getQuestion() {
-		return question;
-	}
+		
+		/**
+		 * @return the id
+		 */
+		public String getId() {
+			return id;
+		}
 
-	/**
-	 * @param question
-	 *            the question to set
-	 */
-	public void setQuestion(String question) {
-		this.question = question;
-	}
+		/**
+		 * @param id the id to set
+		 */
+		public void setId(String id) {
+			this.id = id;
+		}
 
-	/**
-	 * @return the yesCount
-	 */
-	public int getOption1Count() {
-		return option1Count;
-	}
+		/**
+		 * @return the options
+		 */
+		public ArrayList<Options> getOptions() {
+			return options;
+		}
 
-	/**
-	 * @param yesCount
-	 *            the yesCount to set
-	 */
-	public void setOption1Count(int yesCount) {
-		this.option1Count = yesCount;
-	}
+		/**
+		 * @param options the options to set
+		 */
+		public void setOptions(ArrayList<Options> options) {
+			this.options = options;
+		}
 
-	/**
-	 * @return the noCount
-	 */
-	public int getOption2Count() {
-		return option2Count;
-	}
+		/**
+		 * @return the startDate
+		 */
+		public String getStartDate() {
+			return startDate;
+		}
 
-	/**
-	 * @param noCount
-	 *            the noCount to set
-	 */
-	public void setOption2Count(int noCount) {
-		this.option2Count = noCount;
-	}
+		/**
+		 * @param startDate the startDate to set
+		 */
+		public void setStartDate(String startDate) {
+			this.startDate = startDate;
+		}
 
-	/**
-	 * @return the uniqueKey
-	 */
-	public String getUniqueKey() {
-		return _id;
-	}
+		/**
+		 * @return the endDate
+		 */
+		public String getEndDate() {
+			return endDate;
+		}
 
-	/**
-	 * @param uniqueKey
-	 *            the uniqueKey to set
-	 */
-	public void setUniqueKey(String uniqueKey) {
-		this._id = uniqueKey;
-	}
+		/**
+		 * @param endDate the endDate to set
+		 */
+		public void setEndDate(String endDate) {
+			this.endDate = endDate;
+		}
 
-	/**
-	 * @return the option1
-	 */
-	public String getOption1() {
-		return option1;
-	}
+		/**
+		 * @return the email
+		 */
+		public String getEmail() {
+			return email;
+		}
 
-	/**
-	 * @param option1
-	 *            the option1 to set
-	 */
-	public void setOption1(String option1) {
-		this.option1 = option1;
-	}
+		/**
+		 * @param email the email to set
+		 */
+		public void setEmail(String email) {
+			this.email = email;
+		}
 
-	/**
-	 * @return the option2
-	 */
-	public String getOption2() {
-		return option2;
-	}
+		/**
+		 * @return the userId
+		 */
+		public String getUserId() {
+			return userId;
+		}
 
-	/**
-	 * @param option2
-	 *            the option2 to set
-	 */
-	public void setOption2(String option2) {
-		this.option2 = option2;
-	}
+		/**
+		 * @param userId the userId to set
+		 */
+		public void setUserId(String userId) {
+			this.userId = userId;
+		}
 
 }

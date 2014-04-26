@@ -28,7 +28,7 @@ import edu.sjsu.cmpe.voting.domain.Poll;
 public class VotingRepository implements VotingRepositoryInterface {
 
 	/** In-memory map to store polls. (Key, Value) -> (PollKey, Poll) */
-	private final ConcurrentHashMap<String, Poll> pollInMemoryMap;
+	//private final ConcurrentHashMap<String, Poll> pollInMemoryMap;
 	static Random rnd;
 	// Characters used to generate unique 4 letter key.
 	static final String characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -38,7 +38,7 @@ public class VotingRepository implements VotingRepositoryInterface {
 	/** Constructor to create a Voting Repository */
 	public VotingRepository() {
 		// checkNotNull(pollMap, "bookMap must not be null for BookRepository");
-		pollInMemoryMap = null;
+		//pollInMemoryMap = null;
 		pollKey = 0;
 
 	}
@@ -76,7 +76,7 @@ public class VotingRepository implements VotingRepositoryInterface {
 		pollInMemory.append("options", new ArrayList());
 		pollInMemory.append("startDate", newPoll.getStartDate());
 		pollInMemory.append("endDate",newPoll.getEndDate());
-		pollInMemory.append("email", newPoll.getEmail());
+		pollInMemory.append("userId", newPoll.getUserId());
 		try {
 			DB db = mongoConnection();
 			DBCollection poll = db.getCollection("poll");
@@ -112,7 +112,6 @@ public class VotingRepository implements VotingRepositoryInterface {
 				poll.setQuestion(pollObj.get("question").toString());
 				poll.setStartDate(pollObj.get("startDate").toString());
 				poll.setEndDate(pollObj.get("endDate").toString());
-				poll.setEmail(pollObj.get("email").toString());
 				ArrayList<DBObject> optionsObj = (ArrayList<DBObject>) pollObj.get("options");
 				ArrayList<Options> options = new ArrayList<Options>();
 				for (int i = 0; i < optionsObj.size(); i++) {
@@ -154,7 +153,7 @@ public class VotingRepository implements VotingRepositoryInterface {
 			poll.setQuestion(pollObj.get("question").toString());
 			poll.setStartDate(pollObj.get("startDate").toString());
 			poll.setEndDate(pollObj.get("endDate").toString());
-			poll.setEmail(pollObj.get("email").toString());
+			poll.setUserId(pollObj.get("userId").toString());
 			ArrayList<DBObject> optionsObj = (ArrayList<DBObject>) pollObj.get("options");
 			ArrayList<Options> options = new ArrayList<Options>();
 			for (int i = 0; i < optionsObj.size(); i++) {
@@ -178,7 +177,6 @@ public class VotingRepository implements VotingRepositoryInterface {
 			}
 			
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -197,7 +195,6 @@ public class VotingRepository implements VotingRepositoryInterface {
 			DB db = mongoConnection();
 			DBCollection pollColl = db.getCollection("poll");
 			DBCursor cursor = pollColl.find();
-			// System.out.println(cursor);
 			for (int i = 0; i < cursor.size(); i++) {
 				if (cursor.hasNext()) {
 					DBObject pollObject = cursor.next();
@@ -207,7 +204,7 @@ public class VotingRepository implements VotingRepositoryInterface {
 						p.setQuestion(pollObject.get("question").toString());
 						p.setStartDate(pollObject.get("startDate").toString());
 						p.setEndDate(pollObject.get("endDate").toString());
-						p.setEmail(pollObject.get("email").toString());
+						p.setUserId(pollObject.get("userId").toString());
 						ArrayList<DBObject> optionsObj = (ArrayList<DBObject>) pollObject.get("options");
 						ArrayList<Options> options = new ArrayList<Options>();
 						for (int j = 0; j < optionsObj.size(); j++) {
@@ -217,23 +214,19 @@ public class VotingRepository implements VotingRepositoryInterface {
 							options.add(op);
 						}
 						p.setOptions(options);
-						System.out.println(p.getQuestion());
 						poll.add(p);
+						return poll;
 					}
 
-				} else {
-					break;
 				}
 			}
-			for (int j = 0; j < poll.size(); j++) {
-				System.out.println(poll.get(j).getId());
-			}
-			return poll;
+			
 
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
+		return null;
 	}
 }
