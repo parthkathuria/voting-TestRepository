@@ -143,6 +143,7 @@ public class VotingRepository implements VotingRepositoryInterface {
 		checkNotNull(key, "Key instance cannot be null");
 		DB db;
 		Poll poll = new Poll();
+		
 		try {
 			db = mongoConnection();
 			DBCollection pollColl = db.getCollection("poll");

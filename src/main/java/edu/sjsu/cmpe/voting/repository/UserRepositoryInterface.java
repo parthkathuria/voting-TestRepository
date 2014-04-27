@@ -10,7 +10,8 @@ public interface UserRepositoryInterface {
 	
 	Users getUser(String userId);
 	
-	void updatePollSubmition(String pollId);
+	void updatePollSubmition(String userId, String pollId);
 	
 	void updatePollCreation(String userId, String pollId);
+	
 }

@@ -33,6 +33,7 @@ public class UserRepository implements UserRepositoryInterface {
 			user.put("last_name", newUser.getLast_name());
 			user.put("email", newUser.getEmail());
 			user.put("gender", newUser.getGender());
+			
 			user.put("pollsCreated", newUser.getPollsCreated());
 			user.put("pollsSubmitted", newUser.getPollsSubmited());
 			try {
@@ -70,8 +71,10 @@ public class UserRepository implements UserRepositoryInterface {
 				user.setLast_name(userObj.get("last_name").toString());
 				user.setEmail(userObj.get("email").toString());
 				user.setGender(userObj.get("gender").toString());
+				
 				user.setPollsCreated((ArrayList<String>) userObj.get("pollsCreated"));
-				user.setPollsSubmited((ArrayList<String>) userObj.get("pollsSubmited"));
+				user.setPollsSubmited((ArrayList<String>) userObj.get("pollsSubmitted"));
+				
 				return user;
 			}
 
@@ -82,11 +85,6 @@ public class UserRepository implements UserRepositoryInterface {
 		}
 	}
 
-	public void updatePollSubmition(String pollId) {
-		checkNotNull(pollId, "Poll Id instance cannot be null");
-		
-	}
-	
 	public DB mongoConnection() throws UnknownHostException {
 		MongoClient client = new MongoClient();
 		DB db = client.getDB("votingRepository");
@@ -108,6 +106,22 @@ public class UserRepository implements UserRepositoryInterface {
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public void updatePollSubmition(String userId, String pollId) {
+		checkNotNull(pollId, "Poll Id instance cannot be null");
+		checkNotNull(userId, "User Id instance cannot be null");
+		Users user = getUser(userId);
+		
+		try {
+			DB db = mongoConnection();
+			DBCollection userColl = db.getCollection("users");
+			userColl.update(new BasicDBObject("_id",user.getId()), new BasicDBObject("$addToSet", new BasicDBObject("pollsSubmitted", pollId)));
+		}catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

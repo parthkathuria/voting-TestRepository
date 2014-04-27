@@ -4,6 +4,7 @@
 package edu.sjsu.cmpe.voting.ui.resources;
 
 import java.io.Console;
+import java.util.ArrayList;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -39,33 +40,32 @@ import edu.sjsu.cmpe.voting.ui.views.homePage;
 public class ViewPollResource {
 	private final VotingRepositoryInterface voteRepository;
 	private final UserRepositoryInterface userRepository;
+
 	// private final String template;
-	public ViewPollResource(VotingRepositoryInterface voteRepository, UserRepositoryInterface userRepository) {
+	public ViewPollResource(VotingRepositoryInterface voteRepository,
+			UserRepositoryInterface userRepository) {
 		this.voteRepository = voteRepository;
 		this.userRepository = userRepository;
 	}
 
-	/*@GET
-	public homePage getHome() {
-
-		return new homePage("index.mustache");
-	}
-	*/
-	/*@POST
-	@Timed(name = "create-user")
-	public Response createUser(@PathParam("userId") LongParam userId) {
-		Users user = userRepository.getUser(userId.get());
-		if(user == null){
-			Users newUser = new Users();
-			newUser.setId(userId.get());
-			userRepository.saveUser(newUser);
-			return Response.status(200).entity(userId).build();
-		}else{
-			return Response.status(201).entity(userId).build();
-		}
-		
-	}
-*/
+	/*
+	 * @GET public homePage getHome() {
+	 * 
+	 * return new homePage("index.mustache"); }
+	 */
+	/*
+	 * @POST
+	 * 
+	 * @Timed(name = "create-user") public Response
+	 * createUser(@PathParam("userId") LongParam userId) { Users user =
+	 * userRepository.getUser(userId.get()); if(user == null){ Users newUser =
+	 * new Users(); newUser.setId(userId.get());
+	 * userRepository.saveUser(newUser); return
+	 * Response.status(200).entity(userId).build(); }else{ return
+	 * Response.status(201).entity(userId).build(); }
+	 * 
+	 * }
+	 */
 	@GET
 	public UserDetails getCreatePoll(@PathParam("userId") String userId) {
 		Users user = userRepository.getUser(userId);
@@ -75,7 +75,8 @@ public class ViewPollResource {
 	@GET
 	@Path("/{key}")
 	@Timed(name = "view-poll")
-	public ViewPoll_View getBookByIsbn(@PathParam("userId") String userId, @PathParam("key") String key) {
+	public ViewPoll_View getPollById(@PathParam("userId") String userId,
+			@PathParam("key") String key) {
 		Poll poll = voteRepository.getPollbyKey(key);
 		Users user = userRepository.getUser(userId);
 		if (poll != null || user != null) {
@@ -89,7 +90,13 @@ public class ViewPollResource {
 			p.setFirst_name(user.getFirst_name());
 			p.setLast_name(user.getLast_name());
 			p.setEmail(user.getEmail());
-			return new ViewPoll_View(p, "viewPoll.mustache");
+			
+			
+			if (user.getPollsSubmited().contains(p.getId())) {
+				return new ViewPoll_View(p, "submittedPoll.mustache");
+			} else {
+				return new ViewPoll_View(p, "viewPoll.mustache");
+			}
 		} else {
 			return null;
 		}
@@ -98,8 +105,8 @@ public class ViewPollResource {
 	@PUT
 	@Path("/{key}")
 	@Timed(name = "answer-poll")
-	public ViewPoll_View answerPoll(@PathParam("userId") String userId, @PathParam("key") String key,
-			@QueryParam("answer") String answer) {
+	public ViewPoll_View answerPoll(@PathParam("userId") String userId,
+			@PathParam("key") String key, @QueryParam("answer") String answer) {
 		Poll p = voteRepository.getPollbyKey(key);
 		Users user = userRepository.getUser(userId);
 		PollDetails poll = new PollDetails();
@@ -120,8 +127,11 @@ public class ViewPollResource {
 		}
 
 		if (ok) {
+
 			voteRepository.updatePoll(key, answer);
-			return new ViewPoll_View(poll,"viewPoll.mustache");
+			userRepository.updatePollSubmition(userId, poll.getId());
+			return new ViewPoll_View(poll, "submittedPoll.mustache");
+
 		}
 		return null;
 
@@ -130,7 +140,7 @@ public class ViewPollResource {
 	@POST
 	@Timed(name = "create-poll")
 	public Response createPoll(@PathParam("userId") String userId, Poll newPoll) {
-		
+
 		newPoll.setUserId(userId);
 		Poll savedPoll = voteRepository.savePoll(newPoll);
 		userRepository.updatePollCreation(userId, savedPoll.getId().toString());
