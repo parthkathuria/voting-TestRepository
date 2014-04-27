@@ -76,7 +76,6 @@ public class UserRepository implements UserRepositoryInterface {
 			}
 
 		} catch (UnknownHostException e) {
-
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;

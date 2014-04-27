@@ -122,7 +122,6 @@ public class VotingRepository implements VotingRepositoryInterface {
 				}
 				poll.setOptions(options);
 				// poll1.setAnswer(pollObj.get("answer").toString());
-				System.out.println("Poll " + poll);
 				return poll;
 			} else {
 				return null;

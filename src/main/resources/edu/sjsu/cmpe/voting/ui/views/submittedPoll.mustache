@@ -228,37 +228,7 @@ window.fbAsyncInit = function() {
         <fieldset>
 
             <legend>Poll ID: {{poll.id}} </legend>
-            
-            
-            <table id="pollTable" class="table table-striped table-hover ">
-
-                <thead>
-
-                    <tr>
-
-                        <th style="width:20px">Question</th>
-
-                        <th>{{poll.question}}</th>
-
-                    </tr>
-
-                </thead>
-			
-                <tbody>
-					{{#poll.options}}
-                    <tr>
-                        <td><input id="{{option}}" name="answer" type="radio" value="{{option}}" /></td>
-                        <td>{{option}}</td>
-                    </tr>
-					{{/poll.options}}
-                </tbody>
-            </table>
-            <button id="updatePoll" type="button" class="btn btn-primary btn-sm" onclick="update_Poll();">Submit</button>
-            <br>
-            <br>
-            <br>
-            <p>This Poll expires on {{poll.endDate}}</p>
-            
+            You have already submitted this Poll.
         </fieldset>
     </form>
                 </div>

@@ -27,6 +27,11 @@ public class PollDetails {
 		private String email;
 		@JsonProperty("userId")
 		private String userId;
+		@JsonProperty("first_name")
+		private String first_name;
+		@JsonProperty("last_name")
+		private String last_name;
+		
 		
 		/**
 		 * @return the question
@@ -126,6 +131,34 @@ public class PollDetails {
 		 */
 		public void setUserId(String userId) {
 			this.userId = userId;
+		}
+
+		/**
+		 * @return the first_name
+		 */
+		public String getFirst_name() {
+			return first_name;
+		}
+
+		/**
+		 * @param first_name the first_name to set
+		 */
+		public void setFirst_name(String first_name) {
+			this.first_name = first_name;
+		}
+
+		/**
+		 * @return the last_name
+		 */
+		public String getLast_name() {
+			return last_name;
+		}
+
+		/**
+		 * @param last_name the last_name to set
+		 */
+		public void setLast_name(String last_name) {
+			this.last_name = last_name;
 		}
 
 }

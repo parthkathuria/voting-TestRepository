@@ -18,7 +18,7 @@ public class Users {
 	@JsonProperty("gender")
 	private String gender;
 	private ArrayList<String> pollsCreated = new ArrayList<String>();
-	private ArrayList<String> pollsSubmited = new ArrayList<String>();
+	private ArrayList<String> pollsSubmitted = new ArrayList<String>();
 	
 	/**
 	 * @return the pollsCreated
@@ -36,13 +36,13 @@ public class Users {
 	 * @return the pollsSubmited
 	 */
 	public ArrayList<String> getPollsSubmited() {
-		return pollsSubmited;
+		return pollsSubmitted;
 	}
 	/**
 	 * @param pollsSubmited the pollsSubmited to set
 	 */
 	public void setPollsSubmited(ArrayList<String> pollsSubmited) {
-		this.pollsSubmited = pollsSubmited;
+		this.pollsSubmitted = pollsSubmited;
 	}
 	/**
 	 * @return the id

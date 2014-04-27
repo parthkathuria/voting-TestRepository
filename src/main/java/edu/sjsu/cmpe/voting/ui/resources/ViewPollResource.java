@@ -69,18 +69,27 @@ public class ViewPollResource {
 	@GET
 	public UserDetails getCreatePoll(@PathParam("userId") String userId) {
 		Users user = userRepository.getUser(userId);
-		System.out.println(user.getFirst_name());
-		System.out.println(user.getName());
 		return new UserDetails(userRepository.getUser(userId));
 	}
 
 	@GET
 	@Path("/{key}")
 	@Timed(name = "view-poll")
-	public ViewPoll_View getBookByIsbn(@PathParam("key") String key) {
+	public ViewPoll_View getBookByIsbn(@PathParam("userId") String userId, @PathParam("key") String key) {
 		Poll poll = voteRepository.getPollbyKey(key);
-		if (poll != null) {
-			return new ViewPoll_View(voteRepository.getPollbyKey(key));
+		Users user = userRepository.getUser(userId);
+		if (poll != null || user != null) {
+			PollDetails p = new PollDetails();
+			p.setId(poll.getId());
+			p.setQuestion(poll.getQuestion());
+			p.setOptions(poll.getOptions());
+			p.setStartDate(poll.getStartDate());
+			p.setEndDate(poll.getEndDate());
+			p.setUserId(user.getId());
+			p.setFirst_name(user.getFirst_name());
+			p.setLast_name(user.getLast_name());
+			p.setEmail(user.getEmail());
+			return new ViewPoll_View(p, "viewPoll.mustache");
 		} else {
 			return null;
 		}
@@ -89,9 +98,20 @@ public class ViewPollResource {
 	@PUT
 	@Path("/{key}")
 	@Timed(name = "answer-poll")
-	public ViewPoll_View answerPoll(@PathParam("key") String key,
+	public ViewPoll_View answerPoll(@PathParam("userId") String userId, @PathParam("key") String key,
 			@QueryParam("answer") String answer) {
-		Poll poll = voteRepository.getPollbyKey(key);
+		Poll p = voteRepository.getPollbyKey(key);
+		Users user = userRepository.getUser(userId);
+		PollDetails poll = new PollDetails();
+		poll.setId(p.getId());
+		poll.setQuestion(p.getQuestion());
+		poll.setOptions(p.getOptions());
+		poll.setStartDate(p.getStartDate());
+		poll.setEndDate(p.getEndDate());
+		poll.setUserId(user.getId());
+		poll.setEmail(user.getEmail());
+		poll.setFirst_name(user.getFirst_name());
+		poll.setLast_name(user.getLast_name());
 		boolean ok = false;
 		for (int i = 0; i < poll.getOptions().size(); i++) {
 			if (answer.equalsIgnoreCase(poll.getOptions().get(i).getOption())) {
@@ -101,7 +121,7 @@ public class ViewPollResource {
 
 		if (ok) {
 			voteRepository.updatePoll(key, answer);
-			return new ViewPoll_View(voteRepository.getPollbyKey(key));
+			return new ViewPoll_View(poll,"viewPoll.mustache");
 		}
 		return null;
 
