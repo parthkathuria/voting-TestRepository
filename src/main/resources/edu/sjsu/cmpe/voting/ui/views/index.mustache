@@ -46,7 +46,6 @@
                                      data: JSON.stringify(userDetails),
                                      contentType: "application/json",
                                      success: function (resp) {
-                                         alert('user id : ' + uid);
                                          window.location.href = "/voting/"+uid;
                                      },
                                      statusCode: {
