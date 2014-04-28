@@ -117,39 +117,7 @@
 			}
 			return true;
 		}
-        function update_Poll() {
-        var uid;
-        FB.getLoginStatus(function (response) {
-        	 if (response.status === 'connected') {
-        	 	uid = response.authResponse.userID;
-        	 }
-        });
-            var r = document.getElementsByName("answer");
-            var c = -1;
-            var answer;
-            var pollId = $("#pollId").val();
-            for (var i = 0; i < r.length; i++) {
-                if (r[i].checked) {
-                    c = i;
-                    answer = r[i].value;
-                }
-            }
-            if (c == -1) {
-                alert("please select an option.");
-                
-            } else {
-            alert('You selected : '+answer);
-                $.ajax({
-        			url: "/voting/"+uid+"/"+pollId+"?answer="+answer,
-        			type: "PUT",
-        		contentType: "application/json",
-        		success:function(){
-        			window.location.reload(true);
-        		}
-        	});
-            }
-            
-        }
+        
     </script>
 </head>
 <body>
@@ -247,13 +215,12 @@ window.fbAsyncInit = function() {
                 <tbody>
 					{{#poll.options}}
                     <tr>
-                        <td><input id="{{option}}" name="answer" type="radio" value="{{option}}" /></td>
+                    	<td>&raquo</td>
                         <td>{{option}}</td>
                     </tr>
 					{{/poll.options}}
                 </tbody>
-            </table>
-            <button id="updatePoll" type="button" class="btn btn-primary btn-sm" onclick="update_Poll();">Submit</button>
+            </table>            
             <br>
             <br>
             <br>

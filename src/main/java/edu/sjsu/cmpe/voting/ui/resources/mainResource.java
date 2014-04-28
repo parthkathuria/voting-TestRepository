@@ -15,7 +15,7 @@ import edu.sjsu.cmpe.voting.domain.Users;
 import edu.sjsu.cmpe.voting.repository.UserRepositoryInterface;
 import edu.sjsu.cmpe.voting.repository.VotingRepositoryInterface;
 import edu.sjsu.cmpe.voting.ui.views.UserDetails;
-import edu.sjsu.cmpe.voting.ui.views.homePage;
+import edu.sjsu.cmpe.voting.ui.views.HomePage;
 
 @Path("/")
 @Produces(MediaType.TEXT_HTML)
@@ -28,8 +28,8 @@ public class mainResource {
 	}
 	
 	@GET
-	public homePage getHome() {
-		return new homePage("index.mustache");
+	public HomePage getHome() {
+		return new HomePage("index.mustache");
 	}
 	
 	@POST

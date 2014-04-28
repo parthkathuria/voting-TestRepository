@@ -33,7 +33,7 @@ import edu.sjsu.cmpe.voting.repository.UserRepositoryInterface;
 import edu.sjsu.cmpe.voting.repository.VotingRepositoryInterface;
 import edu.sjsu.cmpe.voting.ui.views.ViewPoll_View;
 import edu.sjsu.cmpe.voting.ui.views.UserDetails;
-import edu.sjsu.cmpe.voting.ui.views.homePage;
+import edu.sjsu.cmpe.voting.ui.views.HomePage;
 
 @Path("/{userId}")
 @Produces(MediaType.TEXT_HTML)
@@ -49,9 +49,9 @@ public class ViewPollResource {
 	}
 
 	/*
-	 * @GET public homePage getHome() {
+	 * @GET public HomePage getHome() {
 	 * 
-	 * return new homePage("index.mustache"); }
+	 * return new HomePage("index.mustache"); }
 	 */
 	/*
 	 * @POST
@@ -91,8 +91,9 @@ public class ViewPollResource {
 			p.setLast_name(user.getLast_name());
 			p.setEmail(user.getEmail());
 			
-			
-			if (user.getPollsSubmited().contains(p.getId())) {
+			if(user.getPollsCreated().contains(p.getId())){
+				return new ViewPoll_View(p, "pollViewUser.mustache");
+			}else if (user.getPollsSubmited().contains(p.getId())) {
 				return new ViewPoll_View(p, "submittedPoll.mustache");
 			} else {
 				return new ViewPoll_View(p, "viewPoll.mustache");
