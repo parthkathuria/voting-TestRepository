@@ -228,7 +228,31 @@ window.fbAsyncInit = function() {
         <fieldset>
 
             <legend>Poll ID: {{poll.id}} </legend>
+            <table id="pollTable" class="table table-striped table-hover ">
+
+                <thead>
+
+                    <tr>
+
+                        <th style="width:20px">Question</th>
+
+                        <th>{{poll.question}}</th>
+
+                    </tr>
+
+                </thead>
+			
+                <tbody>
+					{{#poll.options}}
+                    <tr>
+                    	<td>&raquo</td>
+                        <td>{{option}}</td>
+                    </tr>
+					{{/poll.options}}
+                </tbody>
+            </table>            
             You have successfully submitted this Poll.
+            
         </fieldset>
     </form>
                 </div>

@@ -3549,3 +3549,196 @@ INFO  [2014-04-28 00:04:12,703] com.yammer.dropwizard.config.Environment: tasks 
 
 INFO  [2014-04-28 00:04:12,915] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
 INFO  [2014-04-28 00:04:12,916] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
+WARN  [2014-04-28 01:38:56,134] com.yammer.dropwizard.config.ServerFactory: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS SERVICE HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW IF IT    !
+!    DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE LETTING     !
+!     YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH DEPENDENCY OF     !
+!     YOUR SERVICE WHICH FULLY (BUT LIGHTLY) TESTS YOUR SERVICE'S ABILITY TO   !
+!      USE THAT SERVICE. THINK OF IT AS A CONTINUOUS INTEGRATION TEST.         !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2014-04-28 01:38:56,187] com.yammer.dropwizard.cli.ServerCommand: Starting Voting-service
+INFO  [2014-04-28 01:38:56,196] org.eclipse.jetty.server.Server: jetty-8.1.10.v20130312
+INFO  [2014-04-28 01:38:56,267] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.17.1 02/28/2013 12:47 PM'
+INFO  [2014-04-28 01:38:56,328] com.yammer.dropwizard.config.Environment: The following paths were found for the configured resources:
+
+    GET     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    POST    /voting/v1/poll (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    PUT     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    GET     /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    POST    /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    PUT     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    POST    /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    GET     /voting/v1/ (edu.sjsu.cmpe.voting.api.resources.RootResource)
+
+INFO  [2014-04-28 01:38:56,328] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2014-04-28 01:38:56,554] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2014-04-28 01:38:56,557] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
+WARN  [2014-04-28 01:42:57,011] com.yammer.dropwizard.config.ServerFactory: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS SERVICE HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW IF IT    !
+!    DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE LETTING     !
+!     YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH DEPENDENCY OF     !
+!     YOUR SERVICE WHICH FULLY (BUT LIGHTLY) TESTS YOUR SERVICE'S ABILITY TO   !
+!      USE THAT SERVICE. THINK OF IT AS A CONTINUOUS INTEGRATION TEST.         !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2014-04-28 01:42:57,067] com.yammer.dropwizard.cli.ServerCommand: Starting Voting-service
+INFO  [2014-04-28 01:42:57,069] org.eclipse.jetty.server.Server: jetty-8.1.10.v20130312
+INFO  [2014-04-28 01:42:57,156] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.17.1 02/28/2013 12:47 PM'
+WARN  [2014-04-28 01:42:57,188] com.yammer.dropwizard.config.ServerFactory: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS SERVICE HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW IF IT    !
+!    DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE LETTING     !
+!     YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH DEPENDENCY OF     !
+!     YOUR SERVICE WHICH FULLY (BUT LIGHTLY) TESTS YOUR SERVICE'S ABILITY TO   !
+!      USE THAT SERVICE. THINK OF IT AS A CONTINUOUS INTEGRATION TEST.         !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2014-04-28 01:42:57,213] com.yammer.dropwizard.config.Environment: The following paths were found for the configured resources:
+
+    GET     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    POST    /voting/v1/poll (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    PUT     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    GET     /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    POST    /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    PUT     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    POST    /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    GET     /voting/v1/ (edu.sjsu.cmpe.voting.api.resources.RootResource)
+
+INFO  [2014-04-28 01:42:57,213] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2014-04-28 01:42:57,249] com.yammer.dropwizard.cli.ServerCommand: Starting Voting-service
+INFO  [2014-04-28 01:42:57,250] org.eclipse.jetty.server.Server: jetty-8.1.10.v20130312
+INFO  [2014-04-28 01:42:57,344] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.17.1 02/28/2013 12:47 PM'
+INFO  [2014-04-28 01:42:57,405] com.yammer.dropwizard.config.Environment: The following paths were found for the configured resources:
+
+    GET     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    POST    /voting/v1/poll (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    PUT     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    GET     /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    POST    /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    PUT     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    POST    /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    GET     /voting/v1/ (edu.sjsu.cmpe.voting.api.resources.RootResource)
+
+INFO  [2014-04-28 01:42:57,406] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2014-04-28 01:42:57,459] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2014-04-28 01:42:57,460] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
+WARN  [2014-04-28 01:42:57,644] org.eclipse.jetty.util.component.AbstractLifeCycle: FAILED InstrumentedBlockingChannelConnector@0.0.0.0:8080: java.net.BindException: Address already in use: bind
+! java.net.BindException: Address already in use: bind
+! at sun.nio.ch.Net.bind0(Native Method) ~[na:1.7.0_51]
+! at sun.nio.ch.Net.bind(Net.java:444) ~[na:1.7.0_51]
+! at sun.nio.ch.Net.bind(Net.java:436) ~[na:1.7.0_51]
+! at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214) ~[na:1.7.0_51]
+! at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.7.0_51]
+! at org.eclipse.jetty.server.nio.BlockingChannelConnector.open(BlockingChannelConnector.java:127) ~[jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.nio.BlockingChannelConnector.doStart(BlockingChannelConnector.java:85) ~[jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.Server.doStart(Server.java:291) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:48) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:39) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:58) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.cli.Cli.run(Cli.java:53) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.Service.run(Service.java:61) [dropwizard-core-0.6.2.jar:na]
+! at edu.sjsu.cmpe.voting.VotingService.main(VotingService.java:28) [classes/:na]
+WARN  [2014-04-28 01:42:57,644] org.eclipse.jetty.util.component.AbstractLifeCycle: FAILED SocketConnector@0.0.0.0:8081: java.net.BindException: Address already in use: JVM_Bind
+! java.net.BindException: Address already in use: JVM_Bind
+! at java.net.DualStackPlainSocketImpl.bind0(Native Method) ~[na:1.7.0_51]
+! at java.net.DualStackPlainSocketImpl.socketBind(DualStackPlainSocketImpl.java:106) ~[na:1.7.0_51]
+! at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:376) ~[na:1.7.0_51]
+! at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:190) ~[na:1.7.0_51]
+! at java.net.ServerSocket.bind(ServerSocket.java:376) ~[na:1.7.0_51]
+! at java.net.ServerSocket.<init>(ServerSocket.java:237) ~[na:1.7.0_51]
+! at java.net.ServerSocket.<init>(ServerSocket.java:181) ~[na:1.7.0_51]
+! at org.eclipse.jetty.server.bio.SocketConnector.newServerSocket(SocketConnector.java:96) ~[jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.bio.SocketConnector.open(SocketConnector.java:85) ~[jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316) ~[jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.bio.SocketConnector.doStart(SocketConnector.java:156) ~[jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.Server.doStart(Server.java:291) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) [jetty-util-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:48) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:39) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:58) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.cli.Cli.run(Cli.java:53) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.Service.run(Service.java:61) [dropwizard-core-0.6.2.jar:na]
+! at edu.sjsu.cmpe.voting.VotingService.main(VotingService.java:28) [classes/:na]
+WARN  [2014-04-28 01:42:57,644] org.eclipse.jetty.util.component.AbstractLifeCycle: FAILED org.eclipse.jetty.server.Server@50fc3993: MultiException[java.net.BindException: Address already in use: bind, java.net.BindException: Address already in use: JVM_Bind]
+! org.eclipse.jetty.util.MultiException: Multiple exceptions
+! at org.eclipse.jetty.server.Server.doStart(Server.java:273) ~[jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[jetty-util-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:48) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:39) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:58) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.cli.Cli.run(Cli.java:53) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.Service.run(Service.java:61) [dropwizard-core-0.6.2.jar:na]
+! at edu.sjsu.cmpe.voting.VotingService.main(VotingService.java:28) [classes/:na]
+ERROR [2014-04-28 01:42:57,645] com.yammer.dropwizard.cli.ServerCommand: Unable to start server, shutting down
+! org.eclipse.jetty.util.MultiException: Multiple exceptions
+! at org.eclipse.jetty.server.Server.doStart(Server.java:273) ~[jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64) ~[jetty-util-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:48) ~[dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.cli.EnvironmentCommand.run(EnvironmentCommand.java:39) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:58) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.cli.Cli.run(Cli.java:53) [dropwizard-core-0.6.2.jar:na]
+! at com.yammer.dropwizard.Service.run(Service.java:61) [dropwizard-core-0.6.2.jar:na]
+! at edu.sjsu.cmpe.voting.VotingService.main(VotingService.java:28) [classes/:na]
+INFO  [2014-04-28 01:42:57,645] org.eclipse.jetty.server.Server: Graceful shutdown SocketConnector@0.0.0.0:8081
+INFO  [2014-04-28 01:42:57,645] org.eclipse.jetty.server.Server: Graceful shutdown InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2014-04-28 01:42:57,645] org.eclipse.jetty.server.Server: Graceful shutdown o.e.j.s.ServletContextHandler{/,null}
+INFO  [2014-04-28 01:42:57,645] org.eclipse.jetty.server.Server: Graceful shutdown o.e.j.s.ServletContextHandler{/,file:/C:/Users/parthkathuria/Documents/GitHub/voting-TestRepository/target/classes/}
+INFO  [2014-04-28 01:42:59,646] org.eclipse.jetty.server.handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/,file:/C:/Users/parthkathuria/Documents/GitHub/voting-TestRepository/target/classes/}
+INFO  [2014-04-28 01:42:59,647] org.eclipse.jetty.server.handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/,null}
+WARN  [2014-04-28 01:43:36,871] com.yammer.dropwizard.config.ServerFactory: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS SERVICE HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW IF IT    !
+!    DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE LETTING     !
+!     YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH DEPENDENCY OF     !
+!     YOUR SERVICE WHICH FULLY (BUT LIGHTLY) TESTS YOUR SERVICE'S ABILITY TO   !
+!      USE THAT SERVICE. THINK OF IT AS A CONTINUOUS INTEGRATION TEST.         !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2014-04-28 01:43:36,923] com.yammer.dropwizard.cli.ServerCommand: Starting Voting-service
+INFO  [2014-04-28 01:43:36,925] org.eclipse.jetty.server.Server: jetty-8.1.10.v20130312
+INFO  [2014-04-28 01:43:37,008] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.17.1 02/28/2013 12:47 PM'
+INFO  [2014-04-28 01:43:37,060] com.yammer.dropwizard.config.Environment: The following paths were found for the configured resources:
+
+    GET     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    POST    /voting/v1/poll (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    PUT     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    GET     /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    POST    /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    PUT     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    POST    /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    GET     /voting/v1/ (edu.sjsu.cmpe.voting.api.resources.RootResource)
+
+INFO  [2014-04-28 01:43:37,060] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2014-04-28 01:43:37,304] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2014-04-28 01:43:37,305] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
