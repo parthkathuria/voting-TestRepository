@@ -36,6 +36,44 @@
             });
         }
         
+       function deletePoll(key) {
+            var pollId = key.id;
+            var uid;
+            FB.getLoginStatus(function (response) {
+                if (response.status === 'connected') {
+                    uid = response.authResponse.userID;
+                    if (confirm('Are you sure you want to delete the following Poll : ' + pollId)) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: "/voting/" + uid,
+                            data: pollId,
+                            contentType: "application/json",
+                            success: function (response) {
+                                var res = response;
+                                var str = res.split("$");
+                                alert("Poll ID: " + str[0] + " Successfully Deleted. Email has been sent to the following email id : " + str[1]);
+                                window.location.reload(true);
+                            },
+                            statusCode: {
+                                200: function () {
+
+                                },
+                                404: function () {
+                                    alert("Page Not Found");
+
+                                },
+                                500: function () {
+                                    alert("Error Deleting Poll");
+
+                                }
+                            }
+                        });
+                    }
+
+                }
+            });
+        }
+        
         function FBLogin() {
              FB.getLoginStatus(function (response) {
                  if (response.status === 'connected') {
@@ -152,11 +190,14 @@
                             data: JSON.stringify(poll),
                             contentType: "application/json",
                             success: function (response) {
-                                alert("Poll Successfully Created. Your Poll ID is : " + response);
+                            	var str = response;
+                            	var res = str.split("$");
+                                alert("Poll Successfully Created. Your Poll ID is : " + res[0] +". Email has been sent to the following email id : "+res[1] );
+                                window.location.reload(true);
                             },
                             statusCode: {
                                 200: function () {
-                                    alert("Poll Created");
+                                    //alert("Poll Created");
 
                                 },
                                 404: function () {
@@ -420,44 +461,40 @@ window.fbAsyncInit = function() {
                         </fieldset>
                     </form>
                 </div>
-                <div class="col-lg-4 col-lg-offset-1">
+                <div class="col-lg-3">
                     <form class="form-horizontal">
                         <fieldset>
-                            <legend>Dashboard</legend>
-                            <div class="form-group">
-                                
-                            </div>
+                            <legend>ID of Polls you created:</legend>
                             
                             <table class="table table-striped table-hover ">
-                            <thead>
-    							<tr>
-      								<th>ID of Polls you created:</th>
-    							</tr>
-  								</thead>
 								{{#user.pollsCreated}}
                                     <tr>
                                         <td>
                                         	<button type="button" class="btn btn-link btn-xs" id="{{.}}" tooltip="View Poll {{.}}" onclick="getPoll(this);">{{.}}</button>
                                         </td>
                                         <td style="text-align:right">
-                                        	<button type="button" class="close" aria-hidden="true" tooltip="Delete">×</button>
+                                        	<button type="button" id="{{.}}" class="close" aria-hidden="true" tooltip="Delete" onclick="deletePoll(this);">×</button>
                                         </td>
                                     </tr>
                                 {{/user.pollsCreated}} 
                                 </table>
+                        </fieldset>
+                        
+                    </form>
+                </div>
+                <div class="col-lg-3">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <legend>ID of Polls you submitted:</legend>
+                            
                             <table class="table table-striped table-hover ">
-                            <thead>
-    							<tr>
-      								<th>ID of Polls you submitted: </th>
-    							</tr>
-  								</thead>
 								{{#user.pollsSubmitted}}
                                     <tr>
                                         <td>
                                     		{{.}}       
                                         </td>
                                         <td style="text-align:right">
-                                        	<button class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="right" title="" data-original-title="Delete Poll">View</button>
+                                        	<button class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="right" title="" data-original-title="Delete Poll" onclick="">View</button>
                                         </td>
                                     </tr>
                                 {{/user.pollsSubmitted}} 

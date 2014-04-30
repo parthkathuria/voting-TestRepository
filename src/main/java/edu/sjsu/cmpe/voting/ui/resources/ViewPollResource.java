@@ -4,8 +4,14 @@
 package edu.sjsu.cmpe.voting.ui.resources;
 
 import java.io.Console;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -29,6 +35,7 @@ import edu.sjsu.cmpe.voting.domain.Users;
 import edu.sjsu.cmpe.voting.dto.LinkDto;
 import edu.sjsu.cmpe.voting.dto.LinksDto;
 import edu.sjsu.cmpe.voting.dto.PollDto;
+import edu.sjsu.cmpe.voting.repository.AmazonSES;
 import edu.sjsu.cmpe.voting.repository.UserRepositoryInterface;
 import edu.sjsu.cmpe.voting.repository.VotingRepositoryInterface;
 import edu.sjsu.cmpe.voting.ui.views.ViewPoll_View;
@@ -68,7 +75,7 @@ public class ViewPollResource {
 	 */
 	@GET
 	public UserDetails getCreatePoll(@PathParam("userId") String userId) {
-		Users user = userRepository.getUser(userId);
+
 		return new UserDetails(userRepository.getUser(userId));
 	}
 
@@ -76,11 +83,13 @@ public class ViewPollResource {
 	@Path("/{key}")
 	@Timed(name = "view-poll")
 	public ViewPoll_View getPollById(@PathParam("userId") String userId,
-			@PathParam("key") String key) {
+			@PathParam("key") String key) throws ParseException {
 		Poll poll = voteRepository.getPollbyKey(key);
 		Users user = userRepository.getUser(userId);
-		if (poll != null || user != null) {
-			PollDetails p = new PollDetails();
+		PollDetails p = new PollDetails();
+
+		if (poll != null && user != null) {
+
 			p.setId(poll.getId());
 			p.setQuestion(poll.getQuestion());
 			p.setOptions(poll.getOptions());
@@ -90,16 +99,29 @@ public class ViewPollResource {
 			p.setFirst_name(user.getFirst_name());
 			p.setLast_name(user.getLast_name());
 			p.setEmail(user.getEmail());
-			
-			if(user.getPollsCreated().contains(p.getId())){
+			Date date = new Date();
+			DateFormat dt = new SimpleDateFormat("MM/dd/yyyy");
+			Date startDate = dt.parse(p.getStartDate());
+			Date endDate = dt.parse(p.getEndDate());
+
+			if (date.before(startDate)) {
+				return new ViewPoll_View(p, "startPoll.mustache");
+			} else if (date.after(endDate)) {
+				return new ViewPoll_View(p, "endPoll.mustache");
+			} else if (user.getPollsCreated().contains(p.getId())) {
 				return new ViewPoll_View(p, "pollViewUser.mustache");
-			}else if (user.getPollsSubmited().contains(p.getId())) {
+			} else if (user.getPollsSubmited().contains(p.getId())) {
 				return new ViewPoll_View(p, "submittedPoll.mustache");
 			} else {
 				return new ViewPoll_View(p, "viewPoll.mustache");
 			}
 		} else {
-			return null;
+			p.setId(key);
+			p.setUserId(user.getId());
+			p.setFirst_name(user.getFirst_name());
+			p.setLast_name(user.getLast_name());
+			p.setEmail(user.getEmail());
+			return new ViewPoll_View(p, "pollNotFound.mustache");
 		}
 	}
 
@@ -140,12 +162,36 @@ public class ViewPollResource {
 
 	@POST
 	@Timed(name = "create-poll")
-	public Response createPoll(@PathParam("userId") String userId, Poll newPoll) {
+	public Response createPoll(@PathParam("userId") String userId, Poll newPoll)
+			throws IOException {
 
 		newPoll.setUserId(userId);
+		Users user = userRepository.getUser(userId);
+		String email = user.getEmail();
 		Poll savedPoll = voteRepository.savePoll(newPoll);
 		userRepository.updatePollCreation(userId, savedPoll.getId().toString());
-		return Response.status(200).entity(savedPoll.getId()).build();
+		AmazonSES aws = new AmazonSES();
+		aws.sendEmailOnCreate(savedPoll, email);
+		return Response.status(200).entity(savedPoll.getId()+"$"+email).build();
 	}
 
+	@DELETE
+	@Timed(name = "delete-poll")
+	public Response deletePoll(@PathParam("userId") String userId, String pollId)
+			throws IOException {
+
+		Users user = userRepository.getUser(userId);
+		Poll poll = voteRepository.getPollbyKey(pollId);
+		String email = user.getEmail();
+		if (poll == null) {
+			return Response.status(500).entity(pollId + "$" + email).build();
+		} else {
+			AmazonSES aws = new AmazonSES();
+			System.out.println(poll.getId());
+			aws.sendEmailOnDelete(poll, email);
+			userRepository.deletePoll(pollId);
+			voteRepository.deletePoll(pollId);
+			return Response.status(200).entity(pollId + "$" + email).build();
+		}
+	}
 }

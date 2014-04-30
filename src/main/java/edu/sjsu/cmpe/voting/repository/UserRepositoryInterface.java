@@ -14,4 +14,5 @@ public interface UserRepositoryInterface {
 	
 	void updatePollCreation(String userId, String pollId);
 	
+	void deletePoll(String pollId);
 }

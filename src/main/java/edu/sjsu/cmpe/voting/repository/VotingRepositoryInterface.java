@@ -21,4 +21,6 @@ public interface VotingRepositoryInterface {
 	void updatePoll(String key, String answer);
 	
 	ArrayList<Poll> getAllPolls();
+	
+	void deletePoll(String pollId);
 }

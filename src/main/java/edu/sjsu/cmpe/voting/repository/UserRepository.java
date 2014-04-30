@@ -124,4 +124,19 @@ public class UserRepository implements UserRepositoryInterface {
 		}
 	}
 
+	@Override
+	public void deletePoll(String pollId) {
+		// TODO Auto-generated method stub
+		DB db;
+		try {
+			db = mongoConnection();
+			DBCollection userColl = db.getCollection("users");
+			userColl.update(new BasicDBObject("pollsCreated",pollId), new BasicDBObject("$pull", new BasicDBObject("pollsCreated",pollId)),false,true);
+			userColl.update(new BasicDBObject("pollsSubmitted",pollId), new BasicDBObject("$pull", new BasicDBObject("pollsSubmitted",pollId)),false,true);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }

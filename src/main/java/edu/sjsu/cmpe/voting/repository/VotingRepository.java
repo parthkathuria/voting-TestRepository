@@ -107,7 +107,7 @@ public class VotingRepository implements VotingRepositoryInterface {
 			// System.out.println("Poll object " + pollObj);
 
 			if (pollObj != null) {
-				// System.out.println(pollObj.get("_id").toString());
+				System.out.println(pollObj.get("_id").toString());
 				poll.setId(pollObj.get("_id").toString());
 				poll.setQuestion(pollObj.get("question").toString());
 				poll.setStartDate(pollObj.get("startDate").toString());
@@ -228,5 +228,23 @@ public class VotingRepository implements VotingRepositoryInterface {
 			return null;
 		}
 		return null;
+	}
+
+	@Override
+	public void deletePoll(String pollId) {
+		// TODO Auto-generated method stub
+		try {
+			DB db = mongoConnection();
+			DBCollection pollColl = db.getCollection("poll");
+			
+			DBObject poll = pollColl.findOne(new BasicDBObject("_id",pollId));
+			if(poll != null){
+				pollColl.remove(new BasicDBObject("_id",pollId));
+			}
+			
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
