@@ -32,18 +32,7 @@ public class Users {
 	public void setPollsCreated(ArrayList<String> pollsCreated) {
 		this.pollsCreated = pollsCreated;
 	}
-	/**
-	 * @return the pollsSubmited
-	 */
-	public ArrayList<String> getPollsSubmited() {
-		return pollsSubmitted;
-	}
-	/**
-	 * @param pollsSubmited the pollsSubmited to set
-	 */
-	public void setPollsSubmited(ArrayList<String> pollsSubmited) {
-		this.pollsSubmitted = pollsSubmited;
-	}
+	
 	/**
 	 * @return the id
 	 */
@@ -115,6 +104,12 @@ public class Users {
 	 */
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	public ArrayList<String> getPollsSubmitted() {
+		return pollsSubmitted;
+	}
+	public void setPollsSubmitted(ArrayList<String> pollsSubmitted) {
+		this.pollsSubmitted = pollsSubmitted;
 	}
 
 }

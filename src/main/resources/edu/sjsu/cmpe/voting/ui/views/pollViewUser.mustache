@@ -7,15 +7,148 @@
 	<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-    
+     var id = '{{poll.id}}';
+    var updatedCheck = window.setInterval(    
+        function(){$.ajax({
+            type: "GET",
+            url: "/voting/"+{{poll.userId}}+"/"+id + "/update" ,
+            contentType: "application/json",
+            success: function(data){ 
+                //window.location.href = "/voting/"+{{poll.userId}}+"/"+id;
+                //document.getElementById("update").innerHTML = data;
+				//alert(data);		
+                var d = JSON.parse(data);
+                var items = $('td[title="optionCount"]')
+                for(i=0;i<items.length;i++){
+                    var option = items[i].id.slice("5");
+                    var count = items[i].innerHTML;
+                    //alert(d.options[i].count);
+                    document.getElementById("count"+option).innerHTML = d.options[i].count;
+                }
+                
+                	
+             
+					var items = $('td[title="optionCount"]')
+                    // Create the data table.
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Options');
+                    data.addColumn('number', 'Votes');
+                    
+                    for(i=0;i<items.length;i++){
+                    var option = items[i].id.slice("5").toString();;
+                    var count = parseInt(items[i].innerHTML);
+                    //alert(option+":"+count);
+                    data.addRows([
+                      [option, count],
+              
+                    ]);
+                    
+                    }
+                        // Set chart options
+                        var options = {
+                            'title': '{{poll.question}}',
+                            'width': 800,
+                            'height': 300
+                        };
+
+                        // Instantiate and draw our chart, passing in some options.
+                        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+                        chart.draw(data, options);
+                    
+						
+                        //console.log(d);
+                        //alert(d.options[0].option);
+                        //The user is updated - the page needs a reload
+                    }
+
+                })}
+        , 3000);
+        
+        
+       function getPollDetails() {
+            var pollId = id
+            var uid;
+            FB.getLoginStatus(function (response) {
+                if (response.status === 'connected') {
+                    uid = response.authResponse.userID;
+                    
+                        $.ajax({
+                            type: "POST",
+                            url: "/voting/" + uid +"/" + pollId,
+                            data: pollId,
+                            contentType: "application/json",
+                            success: function (response) {
+                                var res = response;
+                                var str = res.split("$");
+                                alert("Poll ID: " + str[0] + ". Poll Details has been sent to the following email id : " + str[1]);
+                                document.getElementById("message").innerHTML = "Poll ID: " + str[0] + ". Poll Details has been sent to the following email id : " + str[1];
+                                //window.location.reload(true);
+                            },
+                            statusCode: {
+                                200: function () {
+									 
+                                },
+                                404: function () {
+                                    alert("Page Not Found");
+
+                                },
+                                500: function () {
+                                    alert("Error Sending email. Please try again.");
+
+                                }
+                            }
+                        });
+
+                }
+            });
+        }
+        
     function viewPollById() {
             var code = $("#poll_code").val();
+            if("" == code){
+            	alert("Please enter Poll Code");
+            	
+            }else{
+            
             var uid;
             FB.getLoginStatus(function (response) {
                 if (response.status === 'connected') {
                     uid = response.authResponse.userID;
                     window.location.href = "/voting/" + uid + "/" + code;
+                }
+            });
+            }
+        }
+    
+    function fbLogin() {
+    
+            FB.getLoginStatus(function (response) {
+                if (response.status === 'connected') {
+                    // the user is logged in and has authenticated your
+                    // app, and response.authResponse supplies
+                    // the user's ID, a valid access token, a signed
+                    // request, and the time the access token 
+                    // and signed request each expire
+                    var uid = response.authResponse.userID;
+                    var accessToken = response.authResponse.accessToken;
+                    
+                    FB.logout(function (response) {
+                        // user is now logged out
+                        
+                        window.location.href = "/voting/";
+                    });
+                } else if (response.status === 'not_authorized') {
+                    // the user is logged in to Facebook, 
+                    // but has not authenticated your app
+                    
+                    window.location.href = "/voting/";
+                } else {
+                    // the user isn't logged in to Facebook.
+                    
+                    window.location.href = "/voting/";
+
                 }
             });
         }
@@ -119,6 +252,41 @@
 		}
         
     </script>
+    <script type="text/javascript">
+        
+        // Load the Visualization API and the piechart package.
+        google.load('visualization', '1.0', { 'packages': ['corechart'] });
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Options');
+            data.addColumn('number', 'Votes');
+            {{#poll.options}}
+            data.addRows([
+              ['{{option}}', {{count}}],
+              
+            ]);
+			{{/poll.options}}
+            // Set chart options
+            var options = {
+                'title': '{{poll.question}}',
+                'width': 800,
+                'height': 300
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
 </head>
 <body>
 
@@ -172,10 +340,10 @@ window.fbAsyncInit = function() {
                 <li class="active"><label for="name" class="navbar-brand">Welcome {{poll.first_name}} !</label></li>
             </ul>
             <form class="navbar-form navbar-right">
-                <button type="button" class="btn btn-primary fb-login-button" data-auto-logout-link="true" data-size="large" onclick="FBLogin();"></button>
+                <button type="button" class="btn btn-primary fb-login-button" data-auto-logout-link="true" data-size="large" onlogin="fbLogin();" onclick="FBLogin();"></button>
             </form>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control col-lg-8" placeholder="Enter Code" id="poll_code" name="poll_code">
+            <form class="navbar-form navbar-right" onsubmit="return frm_submit();">
+                <input type="text" class="form-control col-lg-8" placeholder="Enter Code" id="poll_code" name="poll_code" maxlength="4">
                 <button id="viewPoll" type="button" class="btn btn-success" onclick="viewPollById();">View Poll</button>
             </form>
             
@@ -204,7 +372,7 @@ window.fbAsyncInit = function() {
 
                     <tr>
 
-                        <th style="width:20px">Question</th>
+                        <th style="width:20px">Question:</th>
 
                         <th>{{poll.question}}</th>
 
@@ -220,11 +388,18 @@ window.fbAsyncInit = function() {
                     </tr>
 					{{/poll.options}}
                 </tbody>
-            </table>            
+            </table>   
+            				<div class="form-group">
+                                <div class="col-lg-11">
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="getPollDetails();">Get Details</button><br>
+                                    <br><label id="message"></label>
+                                </div>
+                            </div>         
             <br>
             <br>
             <br>
-            <p>This Poll expires on {{poll.endDate}}</p>
+            <p>Poll Start Date : {{poll.startDate}}</p>
+            <p>Poll End Date : {{poll.endDate}}</p>
             
         </fieldset>
     </form>
@@ -247,7 +422,7 @@ window.fbAsyncInit = function() {
                     <tr>
 
                         <td>{{option}} :</td>
-                        <td>{{count}}</td>
+                        <td title="optionCount" id="count{{option}}">{{count}}</td>
 
                     </tr>
 					{{/poll.options}}
@@ -272,7 +447,7 @@ window.fbAsyncInit = function() {
         <fieldset>
 
             <legend>Graph</legend>
-            
+            <div id="chart_div"></div>
         </fieldset>
     </form>
                 </div>

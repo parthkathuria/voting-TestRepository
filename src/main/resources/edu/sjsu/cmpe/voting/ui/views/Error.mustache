@@ -1,0 +1,245 @@
+<html>
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/flatly/bootstrap.min.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+    
+    function viewPollById() {
+            var code = $("#poll_code").val();
+            if("" == code){
+            	alert("Please enter Poll Code");
+            }else{
+            var uid;
+            FB.getLoginStatus(function (response) {
+                if (response.status === 'connected') {
+                    uid = response.authResponse.userID;
+                    window.location.href = "/voting/" + uid + "/" + code;
+                }
+            });
+            }
+        }
+    
+    function FBLogin() {
+             FB.getLoginStatus(function (response) {
+                 if (response.status === 'connected') {
+                     // the user is logged in and has authenticated your
+                     // app, and response.authResponse supplies
+                     // the user's ID, a valid access token, a signed
+                     // request, and the time the access token 
+                     // and signed request each expire
+                     var uid = response.authResponse.userID;
+                     var accessToken = response.authResponse.accessToken;
+                     FB.logout(function (response) {
+                         // user is now logged out
+                         window.location.href = "/voting/";
+                     });
+                 } else if (response.status === 'not_authorized') {
+                     // the user is logged in to Facebook, 
+                     // but has not authenticated your app
+                 } else {
+                     // the user isn't logged in to Facebook.
+                     FB.login(function (loginResponse) {
+                         if (loginResponse.authResponse) {
+                             FB.api('/me', function (loginResponse) {
+                                 console.log(loginResponse);
+                                 var uid = loginResponse.id;
+                                 var userDetails = {
+                                     id : loginResponse.id,
+                                     name: loginResponse.name,
+                                     first_name: loginResponse.first_name,
+                                     last_name: loginResponse.last_name,
+                                     email: loginResponse.email,
+                                     gender: loginResponse.gender,
+                                 };
+                                 $.ajax({
+                                     type: "POST",
+                                     url: "/voting/",
+                                     data: JSON.stringify(userDetails),
+                                     contentType: "application/json",
+                                     success: function (resp) {
+                                         alert('user id : ' + uid);
+                                         window.location.href = "/voting/"+uid;
+                                     },
+                                     statusCode: {
+                                         200: function () {
+
+                                         },
+                                         201: function () {
+
+                                         },
+                                         404: function () {
+                                             alert("Page Not Found");
+
+                                         },
+                                         500: function () {
+                                             alert("Error Creating User");
+
+                                         }
+                                     }
+                                 });
+                                 
+                             });
+                         } else {
+                             console.log('User cancelled login or did not fully authorize.');
+                         }
+                     }, { scope: 'email' });
+                 }
+             });
+         };
+    
+    
+    var color = "#F71313";
+        var default_color = "#ACB6C0";
+       function frm_submit(){
+			var poll_code = $.trim($("#poll_code").val());
+			if(poll_code == ''){
+				alert("Please enter the Poll Code");
+				$("#poll_code").css("border-color",color);
+				return false;
+			}else{
+				if(!chk_spcl_chr(poll_code)){	
+					alert("Please enter a valid Poll Code");
+					$("#poll_code").css("border-color",color);
+					return false;
+				}
+				$("#poll_form").attr("action", "/voting/"+poll_code);	
+				return true;
+			}
+			return false;
+		};
+		
+		function chk_spcl_chr(val){
+			var regex = new RegExp("^[a-zA-Z0-9 ]+$");
+			var key = val;
+			if (!regex.test(key)) {
+			   return false;
+			}
+			return true;
+		}
+        function update_Poll() {
+        var uid;
+        FB.getLoginStatus(function (response) {
+        	 if (response.status === 'connected') {
+        	 	uid = response.authResponse.userID;
+        	 }
+        });
+            var r = document.getElementsByName("answer");
+            var c = -1;
+            var answer;
+            var pollId = $("#pollId").val();
+            for (var i = 0; i < r.length; i++) {
+                if (r[i].checked) {
+                    c = i;
+                    answer = r[i].value;
+                }
+            }
+            if (c == -1) {
+                alert("please select an option.");
+                
+            } else {
+            alert('You selected : '+answer);
+                $.ajax({
+        			url: "/voting/"+uid+"/"+pollId+"?answer="+answer,
+        			type: "PUT",
+        		contentType: "application/json",
+        		success:function(){
+        			window.location.reload(true);
+        		}
+        	});
+            }
+            
+        }
+    </script>
+</head>
+<body>
+
+<script>
+window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1594873474071994',
+          status     : true,
+          xfbml      : true
+        });
+        FB.getLoginStatus(function(response) {
+  if (response.status === 'connected') {
+    // the user is logged in and has authenticated your
+    // app, and response.authResponse supplies
+    // the user's ID, a valid access token, a signed
+    // request, and the time the access token 
+    // and signed request each expire
+    var uid = response.authResponse.userID;
+    var accessToken = response.authResponse.accessToken;
+  } else if (response.status === 'not_authorized') {
+    // the user is logged in to Facebook, 
+    // but has not authenticated your app
+  } else {
+    // the user isn't logged in to Facebook.
+    window.location.href = "/voting/";
+  }
+ });
+      };
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1594873474071994";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/voting/{{poll.userId}}">Ballot Box</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><label for="name" class="navbar-brand"></label></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <button type="button" class="btn btn-primary fb-login-button" data-auto-logout-link="true" data-size="large" onclick="FBLogin();"></button>
+            </form>
+            <form class="navbar-form navbar-right" onsubmit="return frm_submit();">
+                <input type="text" class="form-control col-lg-8" placeholder="Enter Code" id="poll_code" name="poll_code" maxlength="4">
+                <button id="viewPoll" type="button" class="btn btn-success" onclick="viewPollById();">View Poll</button>
+            </form>
+            
+            
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+    <input type="hidden" name="pollId" id="pollId" value="{{poll.id}}"/>
+        <div class="bs-docs-section">
+            <div class="row">
+                <div class="col-lg-6">
+                   <form class="form-horizontal">
+
+        <fieldset>
+
+            <legend>Error!</legend>
+            Something went wrong.
+        </fieldset>
+    </form>
+                </div>
+            </div>
+        </div>
+                </div>
+                </div>
+    </div>
+</body>
+</html>

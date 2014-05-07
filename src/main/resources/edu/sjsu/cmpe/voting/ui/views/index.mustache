@@ -30,7 +30,7 @@
                      FB.login(function (loginResponse) {
                          if (loginResponse.authResponse) {
                              FB.api('/me', function (loginResponse) {
-                                 console.log(loginResponse);
+                                 //console.log(loginResponse);
                                  var uid = loginResponse.id;
                                  var userDetails = {
                                      id : loginResponse.id,
@@ -68,13 +68,76 @@
                                  
                              });
                          } else {
-                             console.log('User cancelled login or did not fully authorize.');
+                             //console.log('User cancelled login or did not fully authorize.');
                          }
                      }, { scope: 'email' });
                  }
              });
          };
 		
+		
+		function fbLogin() {
+            
+            FB.getLoginStatus(function (response) {
+                if (response.status === 'connected') {
+                    // the user is logged in and has authenticated your
+                    // app, and response.authResponse supplies
+                    // the user's ID, a valid access token, a signed
+                    // request, and the time the access token 
+                    // and signed request each expire
+                    var uid = response.authResponse.userID;
+                    var accessToken = response.authResponse.accessToken;
+                    FB.login(function (loginResponse) {
+                        if (loginResponse.authResponse) {
+                            FB.api('/me', function (loginResponse) {
+                                //console.log(loginResponse);
+                                var uid = loginResponse.id;
+                                var userDetails = {
+                                    id: loginResponse.id,
+                                    name: loginResponse.name,
+                                    first_name: loginResponse.first_name,
+                                    last_name: loginResponse.last_name,
+                                    email: loginResponse.email,
+                                    gender: loginResponse.gender,
+                                };
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/voting/",
+                                    data: JSON.stringify(userDetails),
+                                    contentType: "application/json",
+                                    success: function (resp) {
+                                        window.location.href = "/voting/" + uid;
+                                    },
+                                    statusCode: {
+                                        200: function () {
+
+                                        },
+                                        201: function () {
+
+                                        },
+                                        404: function () {
+                                            alert("Page Not Found");
+
+                                        },
+                                        500: function () {
+                                            alert("Error Creating User");
+
+                                        }
+                                    }
+                                });
+
+                            });
+                        } else if (response.status === 'not_authorized') {
+                            // the user is logged in to Facebook, 
+                            // but has not authenticated your app
+                        } else {
+                            // the user isn't logged in to Facebook.
+
+                        }
+                    }, { scope: 'email' });
+                }
+            });
+        }
     </script>
     <style>
 	.error {
@@ -91,7 +154,7 @@ window.fbAsyncInit = function() {
           appId      : '1594873474071994',
           status     : true,
           xfbml      : true
-        });
+        },true);
          FB.getLoginStatus(function (response) {
              if (response.status === 'connected') {
                  // the user is logged in and has authenticated your
@@ -135,9 +198,9 @@ window.fbAsyncInit = function() {
             <a class="navbar-brand" href="/voting">Ballot Box</a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
-            <form class="navbar-form navbar-right" method="GET" onsubmit="return frm_submit();" action="/voting" id="poll_form">
+            <form class="navbar-form navbar-right">
 				
-				<button type="button" class="btn btn-primary fb-login-button" data-auto-logout-link="true" data-size="large" onclick="FBLogin();">Login</button>
+				<button type="button" class="btn btn-primary fb-login-button" data-auto-logout-link="true" data-size="large" onlogin="fbLogin();" onclick="FBLogin();">Login</button>
 				</div>
             </form>
         </div>
@@ -152,9 +215,22 @@ window.fbAsyncInit = function() {
                 <div class="col-lg-6">
                     <form class="form-horizontal" name="register" id="register">
                         <fieldset>
-                            <legend>Login using Facebook</legend>
-                           
-                            <button type="button" class="btn btn-primary fb-login-button" data-auto-logout-link="true" data-size="xlarge" onclick="FBLogin();">Login</button>
+                            <legend>Ballot-Box</legend>
+                           	<p>Login using Facebook</p>
+                            <button type="button" class="btn btn-primary fb-login-button" data-auto-logout-link="true" data-size="xlarge" onlogin="fbLogin();" onclick="FBLogin();">Login</button><br>
+                            <br><p align="justify">Ballot-Box is a user friendly tool for creating online polls. It is free to use for everyone!
+							Just Login through your Facebook Id's and create a poll get an Id and share the ID with your friends to get their opinions. View other polls with Poll Id's and submit your response. View real time statistics of the poll anytime you need.</p>
+
+<p>Try it Right now!!!! Feel free to provide your feedback by sending an email to <b>"cmpe273infinityballotbox@gmail.com"</b>.</p>
+
+
+<p><b>Developed by: </b><br>
+Parth Khaturia<br>
+Vijaylakshmi Patil<br>
+Jibin Tomy<br>
+Ashwini Khadri<br>
+Shivraj Patil<br>
+</p>
                         </fieldset>
                     </form>
                 </div>

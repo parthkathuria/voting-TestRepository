@@ -9,10 +9,22 @@
     <link href="../assets/calendar/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 	<script src="../assets/calendar/jquery-ui-1.10.4.custom.js"></script>
     <script type="text/javascript">
+    
+   
+    
     var color = "#F71313";
         var default_color = "#ACB6C0";
         
-        
+        function Submit() {
+            var id = document.getElementById("poll_code");
+            if ("" == id) {
+                alert("Please enter Poll Code");
+            } else {
+
+                viewPollById();
+            }
+        }
+
         
         function getPoll(key) {
         	var code = key.id;
@@ -27,6 +39,10 @@
         
         function viewPollById() {
             var code = $("#poll_code").val();
+            if("" == code){
+            	alert("Please enter Poll Code");
+            
+            }else{
             var uid;
             FB.getLoginStatus(function (response) {
                 if (response.status === 'connected') {
@@ -34,6 +50,7 @@
                     window.location.href = "/voting/" + uid + "/" + code;
                 }
             });
+            }
         }
         
        function deletePoll(key) {
@@ -112,7 +129,6 @@
                                      data: JSON.stringify(userDetails),
                                      contentType: "application/json",
                                      success: function (resp) {
-                                         alert('user id : ' + uid);
                                          window.location.href = "/voting/"+uid;
                                      },
                                      statusCode: {
@@ -143,25 +159,37 @@
          };
         
         
-    function onFBLogin(){
-			FB.getLoginStatus(function(response) {
-  if (response.status === 'connected') {
-    // the user is logged in and has authenticated your
-    // app, and response.authResponse supplies
-    // the user's ID, a valid access token, a signed
-    // request, and the time the access token 
-    // and signed request each expire
-    var uid = response.authResponse.userID;
-    var accessToken = response.authResponse.accessToken;
-  } else if (response.status === 'not_authorized') {
-    // the user is logged in to Facebook, 
-    // but has not authenticated your app
-  } else {
-    // the user isn't logged in to Facebook.
-     window.location = "/voting/";
-  }
- });
-		}
+    function fbLogin() {
+    
+            FB.getLoginStatus(function (response) {
+                if (response.status === 'connected') {
+                    // the user is logged in and has authenticated your
+                    // app, and response.authResponse supplies
+                    // the user's ID, a valid access token, a signed
+                    // request, and the time the access token 
+                    // and signed request each expire
+                    var uid = response.authResponse.userID;
+                    var accessToken = response.authResponse.accessToken;
+                    
+                    FB.logout(function (response) {
+                        // user is now logged out
+                        
+                        window.location.href = "/voting/";
+                    });
+                } else if (response.status === 'not_authorized') {
+                    // the user is logged in to Facebook, 
+                    // but has not authenticated your app
+                    
+                    window.location.href = "/voting/";
+                } else {
+                    // the user isn't logged in to Facebook.
+                    
+                    window.location.href = "/voting/";
+
+                }
+            });
+        }
+		
     function createPoll() {
             if (validate_createPoll()) {
                 FB.getLoginStatus(function (response) {
@@ -194,6 +222,7 @@
                             	var res = str.split("$");
                                 alert("Poll Successfully Created. Your Poll ID is : " + res[0] +". Email has been sent to the following email id : "+res[1] );
                                 window.location.reload(true);
+                                document.getElementById("message").innerHTML= "Poll Successfully Created. Your Poll ID is : " + res[0] +". Email has been sent to the following email id : "+res[1] ;
                             },
                             statusCode: {
                                 200: function () {
@@ -223,45 +252,68 @@
 		
 		if($.trim($("#question").val()) == ""){
 			$("#question").css("border-color",color);
+			$("#msgQuestion").html("Please enter a question");
 				error_count++;
 		}else{
-		$("#question").css("border-color",default_color);
+			$("#question").css("border-color",default_color);
+			$("#msgQuestion").html("");
 		}
 		for(var i=1;i<rowCount;i++){
 			var opt_id = "option"+i;
 			var opt_val = $.trim($("#"+opt_id).val());
 			if(opt_val == ""){
 				$("#"+opt_id).css("border-color",color);
+				$("#msg"+opt_id).html("Please enter an option");
 				error_count++;
 			}else{
 				if(jQuery.inArray( opt_val, optionArray ) != '-1'){
 					$("#"+opt_id).css("border-color",color);
+					$("#msg"+opt_id).html("Options must be unique.");
 					error_count++;
 				}else{
 					optionArray.push( opt_val );
 					$("#"+opt_id).css("border-color",default_color);
+					$("#msg"+opt_id).html("");
 				}
 			}
 		}
 		
 		if($("#start_date").val()==""){
 			$("#start_date").css("border-color",color);
-				error_count++;
-		}else if($("#end_date").val()==""){
-			$("#end_date").css("border-color",color);
+			$("#msgstart_date").html("Please enter the start date");
 				error_count++;
 		}else{
+			$("#start_date").css("border-color",default_color);
+			$("#msgstart_date").html("");
+		} 
+		
+		if($("#end_date").val()==""){
+			$("#end_date").css("border-color",color);
+			$("#msgend_date").html("Please enter the end date");
+				error_count++;
+		}else{
+			$("#end_date").css("border-color",default_color);
+			$("#msgend_date").html("");
+		}
+		
+		//else{
+		var start_date = $("#start_date").val();
+		var end_date = $("#end_date").val();
+		if((start_date!="") &&(end_date !="")){
 			var start_arr = $("#start_date").val().split('/');
 			var end_arr = $("#end_date").val().split('/');
-			var start_date = start_arr[2]+start_arr[1]+start_arr[0];
-			var end_date = end_arr[2]+end_arr[1]+end_arr[0];
-			if(end_date < start_date){
+			var start_date = start_arr[2]+start_arr[0]+start_arr[1];
+			var end_date = end_arr[2]+end_arr[0]+end_arr[1];
+			
+			if(end_date <= start_date){
 				$("#end_date").css("border-color",color);
 				$("#start_date").css("border-color",color);
 				error_count++;
 			}else{
 				$("#end_date").css("border-color",default_color);
 				$("#start_date").css("border-color",default_color);
+				$("#msgend_date").html("");
+				$("#msgstart_date").html("");
 			}
 		}
 		if(error_count > 0){
@@ -272,6 +324,20 @@
 	}
     </script>
     <script type="text/javascript">
+    function clearInputs(){
+		$("#question").val('');
+		
+		var table = document.getElementById("pollTable");
+        var rowCount = table.rows.length;
+        
+        for(i = 1; i<rowCount;i++){
+        	$("#option"+i).val('');
+        }
+		$("#start_date").val('');
+		$("#end_date").val('');
+		
+	}
+    
        function frm_submit(){
 			var poll_code = $.trim($("#poll_code").val());
 			if(poll_code == ''){
@@ -309,6 +375,7 @@
             element1.for = "inputOption"+rowCount;
             element1.className = "col-lg-2 control-label";
             element1.innerHTML = rowCount+'.';
+            
             cell1.appendChild(element1);
 
             var cell2 = row.insertCell(1);
@@ -318,7 +385,11 @@
             element2.id = "option" + rowCount;
             element2.name = "option" + rowCount;
             element2.placeholder = "Option " + rowCount;
+            var elem2 = document.createElement("label");
+            elem2.id = "msgoption" + rowCount;
+            elem2.className = "error";
             cell2.appendChild(element2);
+            cell2.appendChild(elem2);
         }
         
         function deleteRow() {
@@ -382,10 +453,10 @@ window.fbAsyncInit = function() {
                 <li class="active"><label for="name" class="navbar-brand">Welcome {{user.first_name}} !</label></li>
             </ul>
             <form class="navbar-form navbar-right">
-                <button type="button" class="btn btn-primary fb-login-button" data-auto-logout-link="true" data-size="large" onclick="FBLogin();"></button>
+                <button type="button" class="btn btn-primary fb-login-button" data-auto-logout-link="true" data-size="large" onlogin="fbLogin();" onclick="FBLogin();"></button>
             </form>
-            <form class="navbar-form navbar-right" method="GET" onsubmit="return frm_submit();" action="/voting" id="poll_form">
-                <input type="text" class="form-control col-lg-8" placeholder="Enter Code" id="poll_code" name="poll_code">
+            <form class="navbar-form navbar-right" onsubmit="return frm_submit();">
+                <input type="text" class="form-control col-lg-8" placeholder="Enter Code" id="poll_code" name="poll_code" maxlength="4">
                 <button id="viewPoll" type="button" class="btn btn-success" onclick="viewPollById();">View Poll</button>
             </form>
             
@@ -412,6 +483,7 @@ window.fbAsyncInit = function() {
                                         </td>
                                         <td>
                                         	<input type="text" class="form-control" id="question" name="question" placeholder="Question">
+                                        	<label id="msgQuestion" class="error"></label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -420,6 +492,7 @@ window.fbAsyncInit = function() {
                                         </td>
                                         <td>
                                         	<input type="text" class="form-control" id="option1" name="option1" placeholder="Option 1">
+                                        	<label id="msgoption1" class="error"></label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -428,6 +501,7 @@ window.fbAsyncInit = function() {
                                         </td>
                                         <td>
                                         	<input type="text" class="form-control" id="option2" name="option2" placeholder="Option 2">
+                                        	<label id="msgoption2" class="error"></label>
                                         </td>
                                     </tr>
                                     
@@ -436,26 +510,34 @@ window.fbAsyncInit = function() {
                                 <div class="col-lg-10">
                                     <button type="button" class="btn btn-primary" onclick="addRow();">+</button>
                                     <button type="button" class="btn btn-default" onclick="deleteRow();">-</button>
+                                    
                                 </div>
                             </div>
                              <div class="form-group">
                                 <label for="startDate" class="col-lg-4 control-label">Start Date</label>
                                 <div class="col-lg-5">
-                                    <input type="text" class="form-control" name="start_date" id="start_date" readonly='readonly' value="" placeholder="Start Date" />
+                                    <input type="text" class="form-control" name="start_date" id="start_date" value="" placeholder="Start Date" />
+                                	<label id="msgstart_date" class="error"></label>
                                 </div>
 
                             </div>
 							<div class="form-group">
                                 <label for="endDate" class="col-lg-4 control-label">End Date</label>
                                 <div class="col-lg-5">
-                                    <input type="text" class="form-control" name="end_date" id="end_date" readonly='readonly' value="" placeholder="End Date" />
+                                    <input type="text" class="form-control" name="end_date" id="end_date"  value="" placeholder="End Date" />
+                                	<label id="msgend_date" class="error"></label>
                                 </div>
 
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
-                                    <button class="btn btn-default">Cancel</button>
-                                    <button type="button" class="btn btn-primary" onclick="createPoll();">Submit</button>
+                                    <button type="button" class="btn btn-default" onclick="clearInputs();">Cancel</button>
+                                    <button type="button" class="btn btn-primary" onclick="createPoll();">Create</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                   <label id="message"></label>
                                 </div>
                             </div>
                         </fieldset>
@@ -491,13 +573,10 @@ window.fbAsyncInit = function() {
 								{{#user.pollsSubmitted}}
                                     <tr>
                                         <td>
-                                    		{{.}}       
-                                        </td>
-                                        <td style="text-align:right">
-                                        	<button class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="right" title="" data-original-title="Delete Poll" onclick="">View</button>
+                                    		<button type="button" class="btn btn-link btn-xs" id="{{.}}" tooltip="View Poll {{.}}" onclick="getPoll(this);">{{.}}</button>       
                                         </td>
                                     </tr>
-                                {{/user.pollsSubmitted}} 
+                                {{/user.pollsSubmitted}}
                                 </table>
                                 
                         </fieldset>
@@ -510,8 +589,23 @@ window.fbAsyncInit = function() {
 </body>
 <script>
 	$(document).ready(function() {
-		$("#start_date").datepicker();
-		$("#end_date").datepicker();
+		$("#start_date").datepicker({minDate:0,
+			onClose: function (selectedDate) {
+                    var d = new Date(selectedDate);
+                    d.setDate(d.getDate()+1);
+                    $("#end_date").datepicker("option", "minDate", d);
+                    }
+		});
+		$("#end_date").datepicker({minDate:0});
 	});
 </script>
+<style>
+.error{
+	color: #F71313;
+	float: right;
+	font-size: 11px;
+	padding-right: 20px;
+	text-align: center;
+}
+</style>
 </html>

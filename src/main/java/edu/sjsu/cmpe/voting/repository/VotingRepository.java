@@ -55,7 +55,6 @@ public class VotingRepository implements VotingRepositoryInterface {
 		StringBuilder sb = new StringBuilder(len);
 		for (int i = 0; i < len; i++)
 			sb.append(characters.charAt(rnd.nextInt(characters.length())));
-		System.out.println("Key : " + sb);
 		// Checking uniqueness of the Key generated
 		Poll poll = getPollbyKey(sb.toString());
 		if (poll == null)
@@ -107,7 +106,7 @@ public class VotingRepository implements VotingRepositoryInterface {
 			// System.out.println("Poll object " + pollObj);
 
 			if (pollObj != null) {
-				System.out.println(pollObj.get("_id").toString());
+
 				poll.setId(pollObj.get("_id").toString());
 				poll.setQuestion(pollObj.get("question").toString());
 				poll.setStartDate(pollObj.get("startDate").toString());

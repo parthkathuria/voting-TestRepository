@@ -33,9 +33,9 @@ public class UserRepository implements UserRepositoryInterface {
 			user.put("last_name", newUser.getLast_name());
 			user.put("email", newUser.getEmail());
 			user.put("gender", newUser.getGender());
-			
+
 			user.put("pollsCreated", newUser.getPollsCreated());
-			user.put("pollsSubmitted", newUser.getPollsSubmited());
+			user.put("pollsSubmitted", newUser.getPollsSubmitted());
 			try {
 				DB db = mongoConnection();
 				DBCollection polls = db.getCollection("users");
@@ -46,7 +46,7 @@ public class UserRepository implements UserRepositoryInterface {
 				e.printStackTrace();
 			}
 			return newUser;
-		}else{
+		} else {
 			System.out.println("User already exists.");
 			return u;
 		}
@@ -71,10 +71,8 @@ public class UserRepository implements UserRepositoryInterface {
 				user.setLast_name(userObj.get("last_name").toString());
 				user.setEmail(userObj.get("email").toString());
 				user.setGender(userObj.get("gender").toString());
-				
 				user.setPollsCreated((ArrayList<String>) userObj.get("pollsCreated"));
-				user.setPollsSubmited((ArrayList<String>) userObj.get("pollsSubmitted"));
-				
+				user.setPollsSubmitted((ArrayList<String>) userObj.get("pollsSubmitted"));
 				return user;
 			}
 
@@ -96,16 +94,18 @@ public class UserRepository implements UserRepositoryInterface {
 		checkNotNull(pollId, "Poll Id instance cannot be null");
 		checkNotNull(userId, "User Id instance cannot be null");
 		Users user = getUser(userId);
-		
+
 		try {
 			DB db = mongoConnection();
 			DBCollection userColl = db.getCollection("users");
-			userColl.update(new BasicDBObject("_id",user.getId()), new BasicDBObject("$addToSet", new BasicDBObject("pollsCreated", pollId)));
-		}catch (UnknownHostException e) {
+			userColl.update(new BasicDBObject("_id", user.getId()),
+					new BasicDBObject("$addToSet", new BasicDBObject(
+							"pollsCreated", pollId)));
+		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -113,12 +113,14 @@ public class UserRepository implements UserRepositoryInterface {
 		checkNotNull(pollId, "Poll Id instance cannot be null");
 		checkNotNull(userId, "User Id instance cannot be null");
 		Users user = getUser(userId);
-		
+
 		try {
 			DB db = mongoConnection();
 			DBCollection userColl = db.getCollection("users");
-			userColl.update(new BasicDBObject("_id",user.getId()), new BasicDBObject("$addToSet", new BasicDBObject("pollsSubmitted", pollId)));
-		}catch (UnknownHostException e) {
+			userColl.update(new BasicDBObject("_id", user.getId()),
+					new BasicDBObject("$addToSet", new BasicDBObject(
+							"pollsSubmitted", pollId)));
+		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -131,8 +133,12 @@ public class UserRepository implements UserRepositoryInterface {
 		try {
 			db = mongoConnection();
 			DBCollection userColl = db.getCollection("users");
-			userColl.update(new BasicDBObject("pollsCreated",pollId), new BasicDBObject("$pull", new BasicDBObject("pollsCreated",pollId)),false,true);
-			userColl.update(new BasicDBObject("pollsSubmitted",pollId), new BasicDBObject("$pull", new BasicDBObject("pollsSubmitted",pollId)),false,true);
+			userColl.update(new BasicDBObject("pollsCreated", pollId),
+					new BasicDBObject("$pull", new BasicDBObject(
+							"pollsCreated", pollId)), false, true);
+			userColl.update(new BasicDBObject("pollsSubmitted", pollId),
+					new BasicDBObject("$pull", new BasicDBObject(
+							"pollsSubmitted", pollId)), false, true);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
