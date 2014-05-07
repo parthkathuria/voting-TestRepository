@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import com.amazonaws.services.simpleemail.*;
 import com.amazonaws.services.simpleemail.model.*;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.regions.*;
 import com.sun.research.ws.wadl.Option;
@@ -26,6 +28,7 @@ public class AmazonSES {
 						// production access, this address must be verified.
 	static String BODY;
 	static String SUBJECT;
+	AWSCredentials credentials = new BasicAWSCredentials("acesskey","secretkey");
 
 	public void sendEmailOnCreate(Poll poll, String email) throws IOException {
 		// Your AWS credentials are stored in the AwsCredentials.properties file
@@ -34,9 +37,9 @@ public class AmazonSES {
 		// project in Eclipse.
 		TO = email;
 
-		PropertiesCredentials credentials = new PropertiesCredentials(
+		/*PropertiesCredentials credentials = new PropertiesCredentials(
 				AmazonSES.class
-						.getResourceAsStream("AwsCredentials.properties"));
+						.getResourceAsStream("AwsCredentials.properties"));*/
 
 		// Retrieve the AWS Access Key ID and Secret Key from
 		// AwsCredentials.properties.
@@ -106,9 +109,9 @@ public class AmazonSES {
 		// project in Eclipse.
 		TO = email;
 
-		PropertiesCredentials credentials = new PropertiesCredentials(
+		/*PropertiesCredentials credentials = new PropertiesCredentials(
 				AmazonSES.class
-						.getResourceAsStream("AwsCredentials.properties"));
+						.getResourceAsStream("AwsCredentials.properties"));*/
 
 		// Retrieve the AWS Access Key ID and Secret Key from
 		// AwsCredentials.properties.
@@ -169,9 +172,9 @@ public class AmazonSES {
 		// project in Eclipse.
 		TO = email;
 
-		PropertiesCredentials credentials = new PropertiesCredentials(
+		/*PropertiesCredentials credentials = new PropertiesCredentials(
 				AmazonSES.class
-						.getResourceAsStream("AwsCredentials.properties"));
+						.getResourceAsStream("AwsCredentials.properties"));*/
 
 		// Retrieve the AWS Access Key ID and Secret Key from
 		// AwsCredentials.properties.
@@ -242,9 +245,9 @@ public class AmazonSES {
 		// project in Eclipse.
 		TO = email;
 
-		PropertiesCredentials credentials = new PropertiesCredentials(
+		/*PropertiesCredentials credentials = new PropertiesCredentials(
 				AmazonSES.class
-						.getResourceAsStream("AwsCredentials.properties"));
+						.getResourceAsStream("AwsCredentials.properties"));*/
 
 		// Retrieve the AWS Access Key ID and Secret Key from
 		// AwsCredentials.properties.
