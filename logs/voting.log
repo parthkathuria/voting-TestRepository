@@ -10646,3 +10646,127 @@ INFO  [2014-05-07 04:56:01,612] com.yammer.dropwizard.config.Environment: tasks 
 
 INFO  [2014-05-07 04:56:01,843] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
 INFO  [2014-05-07 04:56:01,844] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
+WARN  [2014-05-07 06:30:41,553] com.yammer.dropwizard.config.ServerFactory: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS SERVICE HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW IF IT    !
+!    DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE LETTING     !
+!     YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH DEPENDENCY OF     !
+!     YOUR SERVICE WHICH FULLY (BUT LIGHTLY) TESTS YOUR SERVICE'S ABILITY TO   !
+!      USE THAT SERVICE. THINK OF IT AS A CONTINUOUS INTEGRATION TEST.         !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2014-05-07 06:30:41,615] com.yammer.dropwizard.cli.ServerCommand: Starting Voting-service
+INFO  [2014-05-07 06:30:41,617] org.eclipse.jetty.server.Server: jetty-8.1.10.v20130312
+INFO  [2014-05-07 06:30:41,695] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.17.1 02/28/2013 12:47 PM'
+INFO  [2014-05-07 06:30:41,752] com.yammer.dropwizard.config.Environment: The following paths were found for the configured resources:
+
+    GET     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    POST    /voting/v1/poll (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    PUT     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    DELETE  /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId}/{key}/update (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    POST    /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    POST    /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    PUT     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    POST    /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    GET     /voting/v1/ (edu.sjsu.cmpe.voting.api.resources.RootResource)
+
+INFO  [2014-05-07 06:30:41,752] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2014-05-07 06:30:41,980] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2014-05-07 06:30:41,981] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
+WARN  [2014-05-07 06:32:18,136] com.yammer.dropwizard.config.ServerFactory: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS SERVICE HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW IF IT    !
+!    DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE LETTING     !
+!     YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH DEPENDENCY OF     !
+!     YOUR SERVICE WHICH FULLY (BUT LIGHTLY) TESTS YOUR SERVICE'S ABILITY TO   !
+!      USE THAT SERVICE. THINK OF IT AS A CONTINUOUS INTEGRATION TEST.         !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2014-05-07 06:32:18,187] com.yammer.dropwizard.cli.ServerCommand: Starting Voting-service
+INFO  [2014-05-07 06:32:18,188] org.eclipse.jetty.server.Server: jetty-8.1.10.v20130312
+INFO  [2014-05-07 06:32:18,258] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.17.1 02/28/2013 12:47 PM'
+INFO  [2014-05-07 06:32:18,309] com.yammer.dropwizard.config.Environment: The following paths were found for the configured resources:
+
+    GET     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    POST    /voting/v1/poll (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    PUT     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    DELETE  /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId}/{key}/update (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    POST    /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    POST    /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    PUT     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    POST    /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    GET     /voting/v1/ (edu.sjsu.cmpe.voting.api.resources.RootResource)
+
+INFO  [2014-05-07 06:32:18,309] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2014-05-07 06:32:18,526] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2014-05-07 06:32:18,527] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
+ERROR [2014-05-07 06:34:25,115] com.yammer.dropwizard.jersey.LoggingExceptionMapper: Error handling a request: aedecaa322b4650e
+! java.lang.IllegalArgumentException: The specified properties data doesn't contain the expected properties 'accessKey' and 'secretKey'.
+! at com.amazonaws.auth.PropertiesCredentials.<init>(PropertiesCredentials.java:107) ~[aws-java-sdk-1.7.7.jar:na]
+! at edu.sjsu.cmpe.voting.repository.AmazonSES.sendEmailPollDetails(AmazonSES.java:245) ~[classes/:na]
+! at edu.sjsu.cmpe.voting.ui.resources.ViewPollResource.getDetails(ViewPollResource.java:298) ~[classes/:na]
+! at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.7.0_51]
+! at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) ~[na:1.7.0_51]
+! at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.7.0_51]
+! at java.lang.reflect.Method.invoke(Method.java:606) ~[na:1.7.0_51]
+! at com.sun.jersey.spi.container.JavaMethodInvokerFactory$1.invoke(JavaMethodInvokerFactory.java:60) ~[jersey-server-1.17.1.jar:1.17.1]
+! at com.sun.jersey.server.impl.model.method.dispatch.AbstractResourceMethodDispatchProvider$ResponseOutInvoker._dispatch(AbstractResourceMethodDispatchProvider.java:205) ~[jersey-server-1.17.1.jar:1.17.1]
+! at com.sun.jersey.server.impl.model.method.dispatch.ResourceJavaMethodDispatcher.dispatch(ResourceJavaMethodDispatcher.java:75) ~[jersey-server-1.17.1.jar:1.17.1]
+! at com.yammer.metrics.jersey.InstrumentedResourceMethodDispatchProvider$TimedRequestDispatcher.dispatch(InstrumentedResourceMethodDispatchProvider.java:32) ~[metrics-jersey-2.2.0.jar:na]
+! at com.yammer.dropwizard.jersey.OptionalResourceMethodDispatchAdapter$OptionalRequestDispatcher.dispatch(OptionalResourceMethodDispatchAdapter.java:37) ~[dropwizard-core-0.6.2.jar:na]
+! at com.sun.jersey.server.impl.uri.rules.HttpMethodRule.accept(HttpMethodRule.java:302) ~[jersey-server-1.17.1.jar:1.17.1]
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147) ~[jersey-server-1.17.1.jar:1.17.1]
+! at com.sun.jersey.server.impl.uri.rules.ResourceObjectRule.accept(ResourceObjectRule.java:100) ~[jersey-server-1.17.1.jar:1.17.1]
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147) ~[jersey-server-1.17.1.jar:1.17.1]
+! at com.sun.jersey.server.impl.uri.rules.RootResourceClassesRule.accept(RootResourceClassesRule.java:84) ~[jersey-server-1.17.1.jar:1.17.1]
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1511) [jersey-server-1.17.1.jar:1.17.1]
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1442) [jersey-server-1.17.1.jar:1.17.1]
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1391) [jersey-server-1.17.1.jar:1.17.1]
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1381) [jersey-server-1.17.1.jar:1.17.1]
+! at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:416) [jersey-servlet-1.17.1.jar:1.17.1]
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:538) [jersey-servlet-1.17.1.jar:1.17.1]
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:716) [jersey-servlet-1.17.1.jar:1.17.1]
+! at javax.servlet.http.HttpServlet.service(HttpServlet.java:848) [javax.servlet-3.0.0.v201112011016.jar:na]
+! at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:669) [jetty-servlet-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1448) [jetty-servlet-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at com.yammer.dropwizard.servlets.ThreadNameFilter.doFilter(ThreadNameFilter.java:29) [dropwizard-core-0.6.2.jar:na]
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1419) [jetty-servlet-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:455) [jetty-servlet-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1075) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:384) [jetty-servlet-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1009) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at com.yammer.metrics.jetty.InstrumentedHandler.handle(InstrumentedHandler.java:200) [metrics-jetty-2.2.0.jar:na]
+! at org.eclipse.jetty.server.handler.GzipHandler.handle(GzipHandler.java:264) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at com.yammer.dropwizard.jetty.BiDiGzipHandler.handle(BiDiGzipHandler.java:123) [dropwizard-core-0.6.2.jar:na]
+! at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:154) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.Server.handle(Server.java:368) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:489) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.BlockingHttpConnection.handleRequest(BlockingHttpConnection.java:53) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.AbstractHttpConnection.content(AbstractHttpConnection.java:953) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.content(AbstractHttpConnection.java:1014) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:861) [jetty-http-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:240) [jetty-http-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.BlockingHttpConnection.handle(BlockingHttpConnection.java:72) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.server.nio.BlockingChannelConnector$BlockingChannelEndPoint.run(BlockingChannelConnector.java:298) [jetty-server-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608) [jetty-util-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543) [jetty-util-8.1.10.v20130312.jar:8.1.10.v20130312]
+! at java.lang.Thread.run(Thread.java:744) [na:1.7.0_51]

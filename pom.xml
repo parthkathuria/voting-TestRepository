@@ -14,6 +14,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<dropwizard.version>0.6.2</dropwizard.version>
+		<jackson.version>2.1.1</jackson.version>
+		<spring.version>3.0.7.RELEASE</spring.version>
 	</properties>
 
 	<repositories>
@@ -25,6 +27,10 @@
 		<repository>
 			<id>repo.codahale.com</id>
 			<url>http://repo.codahale.com/</url>
+		</repository>
+		<repository>
+			<id>central</id>
+			<url>http://repo1.maven.org/maven2/</url>
 		</repository>
 	</repositories>
 	<dependencies>
@@ -54,7 +60,138 @@
 			<version>2.12.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>[2.2,)</version>
+		</dependency>
+
+		<!-- JavaMail is only needed if you want to use the JavaMail provider for 
+			Amazon Simple Email Service -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+			<optional>true</optional>
+		</dependency>
+
+
+		<!-- The Amazon Simple Workflow Java Flow framework requires additional 
+			dependencies -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.9</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.6.0</version>
+			<optional>true</optional>
+		</dependency>
+
+
+		<!-- JDK 1.6 and above include StAX support by default, so these two dependencies 
+			are only needed for compiling/running against a 1.5 JVM. -->
+		<dependency>
+			<groupId>stax</groupId>
+			<artifactId>stax-api</artifactId>
+			<version>1.0.1</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>stax</groupId>
+			<artifactId>stax</artifactId>
+			<version>1.2.0</version>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- JUnit is needed to compile the support classes for the workflow service -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.7.7</version>
+		</dependency>
 	</dependencies>
+
+	<developers>
+		<developer>
+			<id>amazonwebservices</id>
+			<organization>Amazon Web Services</organization>
+			<organizationUrl>https://aws.amazon.com</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -144,6 +281,63 @@
 					<skipDeploy>true</skipDeploy>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<configuration>
+					<excludePackageNames>*.internal:*.transform</excludePackageNames>
+					<minmemory>128m</minmemory>
+					<maxmemory>1024m</maxmemory>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+
+
+	<profiles>
+		<profile>
+			<id>publishing</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.5.1</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>sonatype-nexus-staging</serverId>
+							<nexusUrl>https://oss.sonatype.org</nexusUrl>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
