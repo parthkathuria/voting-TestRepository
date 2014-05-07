@@ -89,7 +89,6 @@ public class UserRepository implements UserRepositoryInterface {
 		return db;
 	}
 
-	@Override
 	public void updatePollCreation(String userId, String pollId) {
 		checkNotNull(pollId, "Poll Id instance cannot be null");
 		checkNotNull(userId, "User Id instance cannot be null");
@@ -108,7 +107,6 @@ public class UserRepository implements UserRepositoryInterface {
 
 	}
 
-	@Override
 	public void updatePollSubmition(String userId, String pollId) {
 		checkNotNull(pollId, "Poll Id instance cannot be null");
 		checkNotNull(userId, "User Id instance cannot be null");
@@ -126,7 +124,6 @@ public class UserRepository implements UserRepositoryInterface {
 		}
 	}
 
-	@Override
 	public void deletePoll(String pollId) {
 		// TODO Auto-generated method stub
 		DB db;

@@ -229,7 +229,6 @@ public class VotingRepository implements VotingRepositoryInterface {
 		return null;
 	}
 
-	@Override
 	public void deletePoll(String pollId) {
 		// TODO Auto-generated method stub
 		try {
