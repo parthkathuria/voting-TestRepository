@@ -10576,3 +10576,73 @@ INFO  [2014-05-07 04:25:03,458] com.yammer.dropwizard.config.Environment: tasks 
 
 INFO  [2014-05-07 04:25:03,695] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
 INFO  [2014-05-07 04:25:03,701] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
+WARN  [2014-05-07 04:51:58,193] com.yammer.dropwizard.config.ServerFactory: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS SERVICE HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW IF IT    !
+!    DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE LETTING     !
+!     YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH DEPENDENCY OF     !
+!     YOUR SERVICE WHICH FULLY (BUT LIGHTLY) TESTS YOUR SERVICE'S ABILITY TO   !
+!      USE THAT SERVICE. THINK OF IT AS A CONTINUOUS INTEGRATION TEST.         !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2014-05-07 04:51:58,251] com.yammer.dropwizard.cli.ServerCommand: Starting Voting-service
+INFO  [2014-05-07 04:51:58,253] org.eclipse.jetty.server.Server: jetty-8.1.10.v20130312
+INFO  [2014-05-07 04:51:58,323] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.17.1 02/28/2013 12:47 PM'
+INFO  [2014-05-07 04:51:58,388] com.yammer.dropwizard.config.Environment: The following paths were found for the configured resources:
+
+    GET     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    POST    /voting/v1/poll (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    PUT     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    DELETE  /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId}/{key}/update (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    POST    /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    POST    /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    PUT     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    POST    /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    GET     /voting/v1/ (edu.sjsu.cmpe.voting.api.resources.RootResource)
+
+INFO  [2014-05-07 04:51:58,388] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2014-05-07 04:51:58,614] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2014-05-07 04:51:58,615] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
+WARN  [2014-05-07 04:56:01,364] com.yammer.dropwizard.config.ServerFactory: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS SERVICE HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW IF IT    !
+!    DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE LETTING     !
+!     YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH DEPENDENCY OF     !
+!     YOUR SERVICE WHICH FULLY (BUT LIGHTLY) TESTS YOUR SERVICE'S ABILITY TO   !
+!      USE THAT SERVICE. THINK OF IT AS A CONTINUOUS INTEGRATION TEST.         !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2014-05-07 04:56:01,479] com.yammer.dropwizard.cli.ServerCommand: Starting Voting-service
+INFO  [2014-05-07 04:56:01,481] org.eclipse.jetty.server.Server: jetty-8.1.10.v20130312
+INFO  [2014-05-07 04:56:01,558] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.17.1 02/28/2013 12:47 PM'
+INFO  [2014-05-07 04:56:01,612] com.yammer.dropwizard.config.Environment: The following paths were found for the configured resources:
+
+    GET     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    POST    /voting/v1/poll (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    PUT     /voting/v1/poll/{key} (edu.sjsu.cmpe.voting.api.resources.VoteResource)
+    DELETE  /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/{userId}/{key}/update (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    POST    /voting/{userId} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    POST    /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    PUT     /voting/{userId}/{key} (edu.sjsu.cmpe.voting.ui.resources.ViewPollResource)
+    GET     /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    POST    /voting/ (edu.sjsu.cmpe.voting.ui.resources.mainResource)
+    GET     /voting/v1/ (edu.sjsu.cmpe.voting.api.resources.RootResource)
+
+INFO  [2014-05-07 04:56:01,612] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2014-05-07 04:56:01,843] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2014-05-07 04:56:01,844] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
